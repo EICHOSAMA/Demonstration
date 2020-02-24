@@ -5,7 +5,7 @@ package per.eicho.demo.algorithm.sort;
  * @author toranekojp
  *
  */
-public final class InsertAscendingSort extends AbstractAscendingSort {
+public final class InsertionAscendingSort extends AbstractAscendingSort {
 
 	@Override
 	protected void doSort(int[] nums) {

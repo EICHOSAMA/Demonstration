@@ -8,13 +8,13 @@ import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
-public class InsertAscendingSortTest {
+public class InsertionAscendingSortTest {
 	
-	InsertAscendingSort sort;
+	InsertionAscendingSort sort;
 	
 	@Before
 	public void init() {
-		sort = new InsertAscendingSort();
+		sort = new InsertionAscendingSort();
 	}
 
 	@Test
