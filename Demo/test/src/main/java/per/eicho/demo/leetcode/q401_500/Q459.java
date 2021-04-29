@@ -1,7 +1,5 @@
 package per.eicho.demo.leetcode.q401_500;
 
-import org.graalvm.compiler.virtual.phases.ea.PartialEscapeBlockState.Final;
-
 /**
  * <p>459. Repeated Substring Pattern 的题解代码 </p>
  * 
