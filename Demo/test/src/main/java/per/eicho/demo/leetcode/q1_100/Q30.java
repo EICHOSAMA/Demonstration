@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
  *   4. 1 <= words[i].length <= 30
  *   5. words[i] consists of lower-case English letters.
  * </pre>
- * @see <a href="https://leetcode.com/problems/intersection-of-two-arrays-ii/">350. Intersection of Two Arrays II</a>
+ * @see <a href="https://leetcode.com/problems/substring-with-concatenation-of-all-words/">30. Substring with Concatenation of All Words</a>
  */
 final public class Q30 {
     public List<Integer> findSubstring(String s, String[] words) {
