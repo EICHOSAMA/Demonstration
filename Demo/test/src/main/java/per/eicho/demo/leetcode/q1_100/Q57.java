@@ -63,7 +63,7 @@ final public class Q57 {
         // Main Process: merge.
         final List<Range> resultList = new ArrayList<>();
 
-        if (resultList.size() == 0) {
+        if (intervals.length == 0) {
             resultList.add(newRange);
             return toArray(resultList);
         }
