@@ -6,38 +6,6 @@ package per.eicho.demo.leetcode.q1_100;
  * @see <a href="https://leetcode.com/problems/valid-number/">65. Valid Number</a>
  */
 final public class Q65 {
-
-    public static void main(String[] args) {
-        Q65 q65 = new Q65();
-
-        // System.out.println(q65.isNumber("0e0"));
-        // System.out.println(q65.isNumber("2"));
-        // System.out.println(q65.isNumber("0089"));
-        // System.out.println(q65.isNumber("-0.1"));
-        // System.out.println(q65.isNumber("+3.14"));
-        // System.out.println(q65.isNumber("4."));
-        // System.out.println(q65.isNumber("-.9"));
-        // System.out.println(q65.isNumber("2e10"));
-        // System.out.println(q65.isNumber("-90E3"));
-        // System.out.println(q65.isNumber("3e+7"));
-        // System.out.println(q65.isNumber("+6e-1"));
-        // System.out.println(q65.isNumber("53.5e93"));
-        // System.out.println(q65.isNumber("-123.456e789"));
-        // System.out.println(q65.isNumber("abc"));
-        // System.out.println(q65.isNumber("1a"));
-        // System.out.println(q65.isNumber("1e"));
-        // System.out.println(q65.isNumber("e3"));
-        // System.out.println(q65.isNumber("99e2.5"));
-        // System.out.println(q65.isNumber("--6"));
-        // System.out.println(q65.isNumber("-+3"));
-        // System.out.println(q65.isNumber("95a54e53"));
-        // System.out.println(q65.isNumber("..2"));
-        // System.out.println(q65.isNumber("0.."));
-        // System.out.println(q65.isNumber(".8+"));
-        //System.out.println(q65.isNumber("4e+"));
-        System.out.println(q65.isNumber("5.-"));
-    }
-
     private static final char CHAR_PLUS_SIGN = '+';
     private static final char CHAR_MINUS_SIGN = '-';
 
