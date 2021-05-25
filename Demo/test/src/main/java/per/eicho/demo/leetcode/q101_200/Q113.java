@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import javax.swing.RootPaneContainer;
-
-import org.graalvm.compiler.hotspot.nodes.aot.ResolveDynamicConstantNode;
-
 import per.eicho.demo.leetcode.datastructure.TreeNode;
 
 /**
