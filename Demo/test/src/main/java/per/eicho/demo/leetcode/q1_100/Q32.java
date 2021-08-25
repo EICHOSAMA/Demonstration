@@ -62,7 +62,7 @@ final public class Q32 {
 
             final EndNode endNode = new EndNode();
             currentNode.rightNode = endNode;
-            endNode.rightNode = currentNode;-
+            endNode.rightNode = currentNode;
 
             return startNode;
         }
