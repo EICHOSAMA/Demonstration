@@ -1,7 +1,5 @@
 package per.eicho.demo.leetcode.q401_500;
 
-import java.security.Timestamp;
-
 /**
  * <p>495. Teemo Attacking 的题解代码 </p>
  * 
