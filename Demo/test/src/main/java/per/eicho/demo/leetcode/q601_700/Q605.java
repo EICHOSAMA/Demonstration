@@ -5,7 +5,7 @@ package per.eicho.demo.leetcode.q601_700;
  * 
  * @see <a href="https://leetcode.com/problems/can-place-flowers/">605. Can Place Flowers</a>
  */
-public class Q605 {
+public final class Q605 {
     public boolean canPlaceFlowers(int[] flowerbed, int n) {
 
         final int L = 0;
