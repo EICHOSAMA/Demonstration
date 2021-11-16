@@ -1,9 +1,7 @@
 package per.eicho.demo.leetcode.q401_500;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p>500. Keyboard Row 的题解代码 </p>

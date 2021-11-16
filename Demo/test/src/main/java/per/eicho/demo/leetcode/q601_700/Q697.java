@@ -12,14 +12,12 @@ public final class Q697 {
 
     private static final class Q697ProcessInfo {
 
-        final int num;
         final int firstIndex;
         
         int lastIndex;
         int count;
 
-        Q697ProcessInfo(int num, int index) {
-            this.num = num;
+        Q697ProcessInfo(int index) {
             this.firstIndex = index;
             count = 1;
             lastIndex = index;
@@ -44,7 +42,7 @@ public final class Q697 {
 
             Q697ProcessInfo info = map.get(num);
             if (info == null) {
-                info = new Q697ProcessInfo(num, i);
+                info = new Q697ProcessInfo(i);
                 map.put(num, info);
             } else {
                 info.refreshLastIndex(i);

@@ -1,18 +1,9 @@
 package per.eicho.demo.leetcode.q401_500;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.Queue;
-import java.util.Stack;
-import java.util.stream.Collector;
-
-import jdk.internal.loader.BootLoader;
-import jdk.internal.org.jline.terminal.Cursor;
 
 /**
  * <p>496. Next Greater Element I 的题解代码 </p>
@@ -58,7 +49,7 @@ final public class Q496 {
 
         // 1. init: gather basic information
         final int len1 = nums1.length;
-        final int len2 = nums2.length;
+        //final int len2 = nums2.length;
 
         // 2. prepare DS to store information generated during processing        
         final int[] result = new int[len1];
