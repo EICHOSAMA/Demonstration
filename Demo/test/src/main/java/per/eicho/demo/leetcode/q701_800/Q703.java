@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * <p>703. Kth Largest Element in a Stream 的题解代码 </p>
+ * 
+ * @see <a href="https://leetcode.com/problems/kth-largest-element-in-a-stream/">703. Kth Largest Element in a Stream</a>
+ */
 public final class Q703 {
     private static class KthLargest {
 
