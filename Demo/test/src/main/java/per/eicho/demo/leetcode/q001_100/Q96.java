@@ -1,4 +1,4 @@
-package per.eicho.demo.leetcode.q1_100;
+package per.eicho.demo.leetcode.q001_100;
 
 /**
  * <p>96. Unique Binary Search Trees 的题解代码 </p>

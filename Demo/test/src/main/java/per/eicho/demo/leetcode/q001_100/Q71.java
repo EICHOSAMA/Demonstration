@@ -1,4 +1,4 @@
-package per.eicho.demo.leetcode.q1_100;
+package per.eicho.demo.leetcode.q001_100;
 
 import java.util.Stack;
 
