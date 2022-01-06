@@ -50,7 +50,6 @@ public final class Q52 {
         }
 
         private boolean tryChoose(int candidateCol) {
-            
             final int mark1Index = coordinate2Mark1Index(currentRow, candidateCol);
             final int mark2Index = coordinate2Mark2Index(currentRow, candidateCol);
             
@@ -59,7 +58,6 @@ public final class Q52 {
         }
 
         private void choose(int candidateCol) {
-            
             final int mark1Index = coordinate2Mark1Index(currentRow, candidateCol);
             final int mark2Index = coordinate2Mark2Index(currentRow, candidateCol);
 
