@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 final public class Q51 {
-
     private static class Q51ProcessContext {
         
         final static int COL_USED = -1;
