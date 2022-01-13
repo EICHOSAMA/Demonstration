@@ -1,6 +1,6 @@
 package per.eicho.demo.leetcode.datastructure;
 
-final public class TreeNode {
+public final class TreeNode {
     public int val;
     public TreeNode left;
     public TreeNode right;
