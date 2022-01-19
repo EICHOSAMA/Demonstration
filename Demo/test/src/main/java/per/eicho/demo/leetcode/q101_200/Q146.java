@@ -112,4 +112,13 @@ public final class Q146 {
         }
     }
     
+
+    public static void main(String[] args) {
+        LRUCache lCache = new LRUCache(2);
+        lCache.put(1, 1);
+        lCache.put(2, 2);
+        System.out.println(lCache.get(1));
+        lCache.put(3, 3);
+        System.out.println(lCache.get(2));
+    }
 }
