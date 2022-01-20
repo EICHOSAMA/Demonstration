@@ -22,7 +22,7 @@ public final class Q1367 {
         if (root == null) return false;
         if (isMatching) {
             if (head.val != root.val) return false;
-            return isSubPath(head.next, root.left, true) || isSubPath(head, root.right, true);
+            return isSubPath(head.next, root.left, true) || isSubPath(head.next, root.right, true);
         }
 
         boolean result = false;
