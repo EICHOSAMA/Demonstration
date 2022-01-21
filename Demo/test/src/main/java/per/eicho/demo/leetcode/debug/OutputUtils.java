@@ -2,6 +2,8 @@ package per.eicho.demo.leetcode.debug;
 
 import java.util.List;
 
+import per.eicho.demo.leetcode.datastructure.ListNode;
+
 public final class OutputUtils {
     
     public static void println(String[] strings) {
@@ -30,5 +32,22 @@ public final class OutputUtils {
             if (i != strings.size() - 1) System.out.print(',');
         }
         System.out.println(']');
+    }
+
+    public static void println(ListNode node) {
+        if (node == null) {
+            System.out.println("null");
+            return;
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        sb.append('[');
+        while (node != null) {
+            sb.append(node.val);
+            node = node.next;
+            if (node != null) sb.append(',');
+        }
+        sb.append(']');
+        System.out.println(sb.toString());
     }
 }
