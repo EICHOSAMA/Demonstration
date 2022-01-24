@@ -5,7 +5,6 @@ package per.eicho.demo.leetcode.q601_700;
  * 
  * @see <a href="https://leetcode.com/problems/design-circular-queue/">622. Design Circular Queue</a>
  */
-@SuppressWarnings("unuse")
 public final class Q622 {
     private static final class MyCircularQueue {
 
