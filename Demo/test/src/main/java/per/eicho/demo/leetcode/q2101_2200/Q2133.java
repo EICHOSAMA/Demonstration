@@ -17,7 +17,7 @@ public final class Q2133 {
             }
         }
 
-        final int[] col = new int[n];
+        final int[] col = new int[n + 1];
         for (int i = 0; i < n; i++) {
             final int target = i + 1;
             for (int j = 0; j < n; j++) {
