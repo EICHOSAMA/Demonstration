@@ -16,7 +16,7 @@ public final class Q2062 {
             if (!isVowel(word.charAt(i))) continue;
             int mask = mask(0b00000, word.charAt(i));
 
-            for (int j = i + 1; i < word.length(); j++) {
+            for (int j = i + 1; j < word.length(); j++) {
                 if (!isVowel(word.charAt(j))) break;
                 mask = mask(mask, word.charAt(j));
                 if (mask == 0b11111) count++;
