@@ -13,6 +13,7 @@ public final class Q2027 {
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == 'O') continue;
             i += 2;
+            result++;
         }
 
         return result;
