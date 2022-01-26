@@ -1,7 +1,5 @@
 package per.eicho.demo.leetcode.q001_100;
 
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Stack;
 
 import per.eicho.demo.leetcode.datastructure.ListNode;
