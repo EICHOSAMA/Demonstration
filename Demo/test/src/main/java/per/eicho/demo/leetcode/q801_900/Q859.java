@@ -31,6 +31,7 @@ public final class Q859 {
             if (pair[1] != s.charAt(i) || pair[0] != goal.charAt(i)) return false;
         }
 
+        if (p == 1) return false;
         if (p == 2) return true;
 
         for (int i = 0; i < 26; i++) {
