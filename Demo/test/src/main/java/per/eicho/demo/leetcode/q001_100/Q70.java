@@ -10,7 +10,7 @@ public final class Q70 {
         // 1 <= n <= 45
         final int[] f = new int[n + 1];
 
-        f[0] = 0;
+        f[0] = 1;
 
         for (int i = 0; i < n - 1; i++) {
             final int fi = f[i];
