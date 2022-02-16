@@ -13,7 +13,6 @@ public final class Q997 {
         // 4. All the pairs of trust are unique.
         // 5. ai != bi
         // 6. 1 <= ai, bi <= n
-        if (trust.length == 0) return -1;
         final int[] trustCount = new int[n + 1];
         final int[] trustedCount = new int[n + 1];
 
