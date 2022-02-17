@@ -1,6 +1,5 @@
 package per.eicho.demo.algorithm.kmp;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SizeAction;
 
 /**
  * <pre>
