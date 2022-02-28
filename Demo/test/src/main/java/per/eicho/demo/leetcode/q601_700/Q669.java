@@ -14,7 +14,7 @@ public final class Q669 {
         // 2. 0 <= Node.val <= 10^4
         // 3. The value of each node in the tree is unique.
         // 4. root is guaranteed to be a valid binary search tree.
-        // 5. 0 <= low <= high <= 104
+        // 5. 0 <= low <= high <= 10^4
         if (root == null) return null;
 
         if (root.val < low) return trimBST(root.right, low, high);
