@@ -8,42 +8,22 @@ import per.eicho.demo.leetcode.datastructure.ListNode;
  * @see <a href="https://leetcode.com/problems/merge-two-sorted-lists/">21. Merge Two Sorted Lists</a>
  */
 public final class Q21 {
-        /**
-     * Merge two sorted linked lists and return it as a new list. </br>
-     * The new list should be made by splicing together the nodes of the first two lists.
-     *
-     * @param l1 sorted, asc
-     * @param l2 sorted, asc
-     * @return
-     */
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        if (l1 == null)
-            return l2;
-        if (l2 == null)
-            return l1;
-
-//        assert  l1 != null && l2 != null
-        ListNode result = new ListNode(0); // temp
-        ListNode cursor = result;
-
-        do {
+        // 1. The number of nodes in both lists is in the range [0, 50].
+        // 2. -100 <= Node.val <= 100
+        // 3. Both list1 and list2 are sorted in non-decreasing order.
+        final ListNode dummyHead = new ListNode(0); // dummy Head
+        ListNode tail = dummyHead;
+        while (l1 != null && l2 != null) {
             if (l1.val <= l2.val) {
-                cursor.next = l1; // set next.
-                cursor = l1; // move to next.
+                tail = (tail.next = l1);
                 l1 = l1.next;
             } else {
-                // l1.val > l2.val
-                cursor.next = l2;
-                cursor = l2;
+                tail = (tail.next = l2);
                 l2 = l2.next;
             }
-        } while (l1 != null && l2 != null);
-
-        if (l1 == null)
-            cursor.next = l2;
-        else
-            cursor.next = l1;
-
-        return result.next;
+        }
+        tail.next = l1 == null ? l2 : l1;
+        return dummyHead.next;
     }
 }
