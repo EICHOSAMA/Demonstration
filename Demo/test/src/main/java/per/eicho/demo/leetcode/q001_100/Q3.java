@@ -1,10 +1,10 @@
 package per.eicho.demo.leetcode.q001_100;
 
-
 /**
  * <p>3. Longest Substring Without Repeating Characters 的题解代码 </p>
  * 
- * @see <a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/">3. Longest Substring Without Repeating Characters</a>
+ * @see <a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/">
+ *   3. Longest Substring Without Repeating Characters</a>
  */
 final public class Q3 {
     public int lengthOfLongestSubstring(String s) {
