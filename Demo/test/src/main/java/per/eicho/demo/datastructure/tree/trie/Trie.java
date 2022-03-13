@@ -1,4 +1,4 @@
-package per.eicho.demo.datastructure.trie;
+package per.eicho.demo.datastructure.tree.trie;
 
 import java.util.HashMap;
 import java.util.Map;

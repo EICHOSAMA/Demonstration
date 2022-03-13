@@ -1,4 +1,4 @@
-package per.eicho.demo.datastructure.trie;
+package per.eicho.demo.datastructure.tree.trie;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
