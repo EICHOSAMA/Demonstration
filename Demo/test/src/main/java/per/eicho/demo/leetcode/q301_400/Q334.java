@@ -1,10 +1,13 @@
 package per.eicho.demo.leetcode.q301_400;
 
+import per.eicho.demo.leetcode.q201_300.Q300;
+
 /**
  * <p>334. Increasing Triplet Subsequence 的题解代码 </p>
  * 
  * @see <a href="https://leetcode.com/problems/increasing-triplet-subsequence/">
  *   334. Increasing Triplet Subsequence</a>
+ * @see {@link Q300 Q300. Longest Increasing Subsequence}
  */
 public final class Q334 {
     public boolean increasingTriplet(int[] nums) {
