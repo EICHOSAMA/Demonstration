@@ -10,6 +10,7 @@ import per.eicho.demo.leetcode.datastructure.TreeNode;
  * @see <a href="https://leetcode.com/problems/serialize-and-deserialize-binary-tree/">
  *   297. Serialize and Deserialize Binary Tree</a>
  */
+@SuppressWarnings("unused")
 public final class Q297 {
     private static class Codec {
 
