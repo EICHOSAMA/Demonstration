@@ -6,7 +6,7 @@ package per.eicho.demo.leetcode.q1601_1700;
  * @see <a href="https://leetcode.com/problems/design-front-middle-back-queue/">
  *   1670. Design Front Middle Back Queue</a>
  */
-@SuppressWarnings("unused")
+@SuppressWarnings("unuse")
 public final class Q1670 {
     private static final class FrontMiddleBackQueue {
 
