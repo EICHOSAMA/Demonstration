@@ -50,4 +50,32 @@ public final class OutputUtils {
         sb.append(']');
         System.out.println(sb.toString());
     }
+
+    private static final char[] HEX_CHARS = "0123456789ABCDEF".toCharArray();
+
+    /**
+     * <p>16进制输出</p>
+     * 
+     * <pre>
+     *  把给定的byte数组转换为16进制字符串(由0-9,A-F字符组成)进行输出。
+     *  1byte = 8bits 会被转换成 2个16进制字符。
+     *  如byte 0x0F 会被转换成 "0F" 输出。
+     * </pre>
+     * 
+     * @param input
+     */
+    public static void printAsHexString(byte[] input) {
+        if (input == null) {
+            System.out.println("null");
+            return;
+        }
+
+        final char[] hexChars = new char[input.length * 2];
+        for (int j = 0; j < input.length; j++) {
+            int v = input[j] & 0xFF; // & 0b1111_1111 保留低8位数据，清除高位数据到0。
+            hexChars[j * 2] = HEX_CHARS[v >>> 4];      // 取高四位，映射
+            hexChars[j * 2 + 1] = HEX_CHARS[v & 0x0F]; // 取低四位，映射
+        }
+        System.out.println(new String(hexChars));
+    }
 }
