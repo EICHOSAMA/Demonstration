@@ -9,6 +9,7 @@ final class PathSum {
         // -1000 <= targetSum <= 1000
         if (root == null) return false; // [], 0 → false
         final int subTarget = targetSum - root.val;
+        if (root.left == null && root.right == null && subTarget == 0) return true;
         return hasPathSum(root.left, subTarget) || hasPathSum(root.right, subTarget);
     }
 }
