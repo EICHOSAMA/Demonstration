@@ -8,6 +8,7 @@ import java.util.PriorityQueue;
  * @see <a href="https://leetcode.com/problems/find-median-from-data-stream/">
  *   295. Find Median from Data Stream</a>
  */
+@SuppressWarnings("unused")
 public final class Q295 {
     private final class MedianFinder {
 
