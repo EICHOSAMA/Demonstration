@@ -18,6 +18,8 @@ import per.eicho.demo.leetcode.q101_200.Q145;
  *  
  *   1. 深度优先遍历
  *      a. 前序遍历 (Pre-Order Traversal)
+ *         a.1 普通前序递归遍历法
+ *         a.2 Morris遍历常数空间遍历法 (J.H.Morris在1979年的论文「Traversing Binary Trees Simply and Cheaply」中首次提出)
  *      b. 中序遍历 (In-Order Traversal)
  *      c. 后续遍历 (Post-Order Traversal)
  *   2. 广度优先遍历
@@ -44,6 +46,46 @@ public final class BinaryTreeTraversalSample {
         System.out.println(root.val);
         preorederTraversal(root.left);
         preorederTraversal(root.right);
+    }
+
+    /**
+     * <p>前序遍历 - 莫里斯遍历法</p>
+     * 
+     * <pre>
+     *  空间复杂度为O(1)的前序遍历法。
+     * </pre>
+     * 
+     * @see {@link Q144 144. Binary Tree Preorder Traversal}
+     */
+    public void morrisPreorderTraversal(TreeNode root) {
+        if (root == null) {
+            System.out.println(root);
+            return;
+        }
+
+        TreeNode p1 = root, p2 = null;
+
+        while (p1 != null) {
+            p2 = p1.left;
+            if (p2 != null) {
+                // 找到左子树中最右的节点
+                while (p2.right != null && p2.right != p1) p2 = p2.right;
+
+                if (p2.right == null) {
+                    // 如果是第一次那么建立到子树父亲节点的连接(p2.right = p1)。
+                    System.out.println(p1.val); // 前序遍历：输出父节点
+                    p2.right = p1; // 建立连接，方便遍历时传送回父节点。
+                    p1 = p1.left; // 前序遍历：处理左子树
+                    continue;
+                } else {
+                    // 如果是第二次那么断开到父亲节点的连接(p2.right = null)
+                    p2.right = null;
+                }
+            } else {
+                System.out.println(p1.val);
+            }
+            p1 = p1.right;
+        }
     }
 
     /**

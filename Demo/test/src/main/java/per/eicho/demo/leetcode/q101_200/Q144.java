@@ -2,7 +2,6 @@ package per.eicho.demo.leetcode.q101_200;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 import per.eicho.demo.leetcode.datastructure.TreeNode;
 
@@ -16,65 +15,31 @@ public final class Q144 {
         // 1. The number of nodes in the tree is in the range [0, 100].
         // 2. -100 <= Node.val <= 100        
 		List<Integer> result = new ArrayList<Integer>();
-		if (root == null) {
-			return result;
-		}
-		Stack<TreeNode> stack = new Stack<TreeNode>(); 
-		stack.push(root);
-		result.add(root.val);
-		
-		// record the recent popped node.
-		TreeNode lastNode = null;  
-		while (stack.isEmpty() == false) {
-			TreeNode rt = stack.lastElement();
-			TreeNode l = rt.left;
-			TreeNode r = rt.right;
-			
-			/*
-			 * case 1. rt is leaf node, pop.
-			 * case 2. left child has been traversed and no right child exist, pop. nor see case 5.
-			 * case 3. right child has been traversed , pop.
-			 * case 4. left child has not been traversed, add to stack.
-			 * case 5. right child has not been traversed, add to stack.
-			 */
-			
-			// 1 : check whether node rt is a leaf node.
-			if (l == null && r == null) {
-				lastNode = rt;
-				stack.pop();
-				continue;
-			}
-			
-			// 2 : check whether node rt's left node has been traversed completely.
-			if (l != null && lastNode == l && null == r) {
-				lastNode = rt;
-				stack.pop();
-				continue;
-			}
-			
-			// 3 : check whether node rt's right node has been traversed completely.
-			if (r != null && lastNode == r) {
-				lastNode = rt;
-				stack.pop();
-				continue;
-			}
-			
-			// 4 : traverse left node .
-			if (null != l && l != lastNode) {
-				lastNode = null;
-				stack.push(l);
-				result.add(l.val);
-				continue;
-			}
+		if (root == null) return result;
 
-			// 5 : traverse right node .			
-			if (null != r) {
-				lastNode = null;
-				stack.push(r);
-				result.add(r.val);
-				continue;
-			}
-		}
+        TreeNode p1 = root, p2 = null;
+
+        while (p1 != null) {
+            p2 = p1.left;
+            if (p2 != null) {
+                // 找到左子树中最右的节点
+                while (p2.right != null && p2.right != p1) p2 = p2.right;
+
+                if (p2.right == null) {
+                    // 如果是第一次那么建立到子树父亲节点的连接(p2.right = p1)。
+					result.add(p1.val); // 前序遍历：输出父节点
+                    p2.right = p1; // 建立连接，方便遍历时传送回父节点。
+                    p1 = p1.left; // 前序遍历：处理左子树
+                    continue;
+                } else {
+                    // 如果是第二次那么断开到父亲节点的连接(p2.right = null)
+                    p2.right = null;
+                }
+            } else {
+				result.add(p1.val);
+            }
+            p1 = p1.right;
+        }
 		return result;
     }
 }
