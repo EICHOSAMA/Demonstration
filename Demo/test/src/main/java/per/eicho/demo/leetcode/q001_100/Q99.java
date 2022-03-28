@@ -2,7 +2,6 @@ package per.eicho.demo.leetcode.q001_100;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import per.eicho.demo.leetcode.datastructure.TreeNode;
 
@@ -13,35 +12,34 @@ import per.eicho.demo.leetcode.datastructure.TreeNode;
  */
 public final class Q99 {
     public void recoverTree(TreeNode root) {
-        final List<TreeNode> allNodes = tie(root);
-        // i.e. 1324 vs 1234
-        final List<TreeNode> sortedNodes = allNodes.stream()
-            .sorted((nd1, nd2) -> Integer.compare(nd1.val, nd2.val))
-            .collect(Collectors.toList());
-        
-        for (int i = 0; i < sortedNodes.size(); i++) {
-            final TreeNode nd1 = allNodes.get(i);
-            final TreeNode nd2 = sortedNodes.get(i);
+        // 1. The number of nodes in the tree is in the range [2, 1000].
+        // 2. -2^31 <= Node.val <= 2^31 - 1
+        // Recover the tree without changing its structure.
+        final List<TreeNode> nodes = new ArrayList<>(); 
+        inOrderTraversal(root, nodes);
+        final TreeNode[] swapTarget = findSwapTarget(nodes);
 
-            if (nd1.val != nd2.val) {
-                int temp = nd2.val;
-                nd2.val = nd1.val;
-                nd1.val = temp;
-                break;
-            }
+        final int temp = swapTarget[0].val;
+        swapTarget[0].val = swapTarget[1].val;
+        swapTarget[1].val = temp;
+    }
+
+    public TreeNode[] findSwapTarget(List<TreeNode> nodes) {
+        final int n = nodes.size();
+        int index1 = -1, index2 = -1;
+        for (int i = 0; i < n - 1; ++i) {
+            if (nodes.get(i + 1).val > nodes.get(i).val) continue;
+            index2 = i + 1;
+            if (index1 != -1) break;
+            index1 = i;
         }
+        return new TreeNode[]{nodes.get(index1), nodes.get(index2)};
     }
 
-    private List<TreeNode> tie(TreeNode rNode) {
-        final List<TreeNode> result = new ArrayList<>();
-        doTie(rNode, result);
-        return result;
-    }
-
-    private void doTie(TreeNode rNode, final List<TreeNode> result) {
-        if (null == rNode) return;
-        doTie(rNode.left, result);
-        result.add(rNode);
-        doTie(rNode.right, result);
+    private void inOrderTraversal(TreeNode node, List<TreeNode> output) {
+        if (null == node) return;
+        inOrderTraversal(node.left, output);
+        output.add(node);
+        inOrderTraversal(node.right, output);        
     }
 }
