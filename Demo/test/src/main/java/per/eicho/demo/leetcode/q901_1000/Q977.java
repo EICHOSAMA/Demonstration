@@ -35,7 +35,7 @@ public class Q977 {
                 break;
             }
 
-            if (Math.abs(nums[r]) < Math.abs(nums[l])) {
+            if (nums[r] + nums[l] < 0) {
                 result[p++] = square(nums[r++]); // use right element
             } else {
                 result[p++] = square(nums[l--]); // use left element
