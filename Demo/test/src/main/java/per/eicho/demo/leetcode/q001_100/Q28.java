@@ -1,43 +1,53 @@
 package per.eicho.demo.leetcode.q001_100;
 
+import per.eicho.demo.algorithm.kmp.KMPSample;
+
 /**
  * <p>28. Implement strStr() 的题解代码 </p>
  * 
  * @see <a href="https://leetcode.com/problems/implement-strstr/">28. Implement strStr()</a>
+ * @see {@link KMPSample KMP Sample}
  */
 public final class Q28 {
     public int strStr(String haystack, String needle) {
         // 1. 0 <= haystack.length, needle.length <= 5 * 10^4
         // 2. haystack and needle consist of only lower-case English characters.
-        if (needle.length() == 0) return 0;
+        final int n = haystack.length();
+        final int m = needle.length();
 
-        final int len1 = haystack.length();
-        final int len2 = needle.length();
-        int l = 0, r = 0; // [l, r), l inclusive, r exclusive.
-        int hashCodeOfNeedle = 0;
-        for (int i = 0; i < len2; i++) {
-            hashCodeOfNeedle += needle.charAt(i) * needle.charAt(i);
-        }
-        int hashCodeOfLR = 0;
-        while (r < len1) {
-            int ch = haystack.charAt(r++); // keep r is exclusive.
-            hashCodeOfLR += ch * ch; // include r th element
-            if (r - l >= len2) {
-                if (hashCodeOfLR == hashCodeOfNeedle) {
-                    boolean isEqual = true;
-                    for (int i = l; i < r; i++) {
-                        if (haystack.charAt(i) != needle.charAt(i-l)) {
-                            isEqual = false;
-                            break;
-                        }
-                    }
-                    if (isEqual == true) return l;
-                }
+        if (m == 0) return 0;
+        final int[] pmt = createPMT(needle);
 
-                hashCodeOfLR -= haystack.charAt(l) * haystack.charAt(l);// exclude l th element
-                l++;
+        int i = 0, j = 0;
+        while (true) {
+            if (j == m) return i - j;
+            if (i == n) return -1;
+
+            if (haystack.charAt(i) == needle.charAt(j)) {
+                i++; j++;
+            } else if (j == 0) {
+                i++;
+            } else {
+                j = pmt[j - 1];
             }
         }
-        return -1;
+    }
+
+    private int[] createPMT(String needle) {
+        final int m = needle.length();
+        final int[] pmt = new int[m];
+
+        int prefix = 0;
+        int suffix = 1;
+        while (suffix < m) {
+            if (needle.charAt(prefix) == needle.charAt(suffix)) {
+                pmt[suffix++] = ++prefix;
+            } else if (prefix == 0) {
+                pmt[suffix++] = 0;
+            } else {
+                prefix = pmt[prefix - 1];
+            }
+        }
+        return pmt;
     }
 }
