@@ -9,8 +9,8 @@ public final class Q28 {
     public int strStr(String haystack, String needle) {
         // 1. 0 <= haystack.length, needle.length <= 5 * 10^4
         // 2. haystack and needle consist of only lower-case English characters.
+        if (needle.length() == 0) return 0;
 
-        if (needle.length() == 0) return 0;        
         final int len1 = haystack.length();
         final int len2 = needle.length();
         int l = 0, r = 0; // [l, r), l inclusive, r exclusive.
