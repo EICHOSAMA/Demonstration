@@ -29,36 +29,18 @@ import per.eicho.demo.leetcode.datastructure.TreeNode;
  */
 final public class Q530 {
     public int getMinimumDifference(TreeNode root) {
+        // 1. The number of nodes in the tree is in the range [2, 10^4].
+        // 2. 0 <= Node.val <= 10^5   
         final List<Integer> treeList = new ArrayList<>();
-
-        // 1. tree ⇒ treeList, treeList is in ascending order.
-        doInorderTraversal(root, treeList);
-
-        // 2. 
-        int min = Integer.MAX_VALUE;
-        for (int i = 0; i < treeList.size() - 1; i++) {
-            final int num1 = treeList.get(i);
-            final int num2 = treeList.get(i + 1);
-
-            //assert num2 >= num1;
-            final int difference = num2 - num1;
-            if (difference < min) {
-                min = difference;
-            }
-        }
-
-        return min;
+        return inOrderTraversal(root, treeList);
     }
 
-    private void doInorderTraversal(final TreeNode node, final List<Integer> result) {
-        if (node.left != null) {
-            doInorderTraversal(node.left, result);
-        }
-
+    private int inOrderTraversal(final TreeNode node, final List<Integer> result) {
+        if (node == null) return Integer.MAX_VALUE;
+        int minDiff = inOrderTraversal(node.left, result);
+        if (!result.isEmpty()) minDiff = Math.min(minDiff, node.val - result.get(result.size() - 1));
         result.add(node.val);
-
-        if (node.right != null) {
-            doInorderTraversal(node.right, result);
-        }
+        minDiff = Math.min(minDiff, inOrderTraversal(node.right, result));
+        return minDiff;
     }
 }
