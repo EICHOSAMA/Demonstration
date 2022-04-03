@@ -8,37 +8,34 @@ package per.eicho.demo.leetcode.q701_800;
 public final class Q718 {
     public int findLength(int[] nums1, int[] nums2) {
         // 1. 1 <= nums1.length, nums2.length <= 1000
-        // 2. 0 <= nums1[i], nums2[i] <= 100
+        // 2. 0 <= nums1[i], nums2[i] <= 100        
         final int n = nums1.length;
         final int m = nums2.length;
-        final int[][] f = new int[n + 1][m + 1];
-
         int result = 0;
-        for (int i = 0; i < m; i++) {
-            if (nums2[i] == nums1[0]) {
-                f[0][i] = 1;
-                result = 1;
-            }
+        
+        for (int i = 0; i < n; i++) {
+            final int windowLen = Math.min(m, n - i);
+            result = Math.max(result, maxLength(nums1, nums2, i, 0, windowLen));
         }
 
-        for (int i = 0; i < n; i++) {
-            if (nums2[0] == nums1[i]) {
-                f[i][0] = 1;
-                result = 1;
-            }
-        }
-        
-        for (int i = 1; i < n; i++) {
-            final int num1 = nums1[i];
-            for (int j = 1; j < m; j++) {
-                final int num2 = nums2[j];
-                if (num1 == num2) {
-                    f[i][j] = f[i - 1][j - 1] + 1;
-                    result = Math.max(result, f[i][j]);
-                }
-            }
+        for (int i = 0; i < m; i++) {
+            final int windowLen = Math.min(n, m - i);
+            result = Math.max(result, maxLength(nums1, nums2, 0, i, windowLen));
         }
         return result;
+    }
+
+    public int maxLength(int[] nums1, int[] nums2, int offset1, int offset2, int windowLen) {
+        int result = 0, len = 0;
+        for (int i = 0; i < windowLen; i++) {
+            if (nums1[offset1 + i] == nums2[offset2 + i]) {
+                len++;
+            } else {
+                result = Math.max(result, len);
+                len = 0;
+            }
+        }
+        return Math.max(result, len);
     }
 
     public static void main(String[] args) {
