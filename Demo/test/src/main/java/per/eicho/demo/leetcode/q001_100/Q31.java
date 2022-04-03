@@ -1,13 +1,5 @@
 package per.eicho.demo.leetcode.q001_100;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 /**
  * <p>31. Next Permutation 的题解代码 </p>
  * 
@@ -43,151 +35,40 @@ import java.util.stream.IntStream;
  */
 public class Q31 {
     public void nextPermutation(int[] nums) {
-        // 1. create tree. 
-        final TreeNode root = TreeNode.CreateRootNode(nums);
+        // 1. 1 <= nums.length <= 100
+        // 2. 0 <= nums[i] <= 100
+        final int n = nums.length;
         
-        // 2. main process.
-        root.nextPermutation();
+        int i = n - 2;
+        while (i >= 0 && nums[i] >= nums[i + 1]) i--; 
+        
+        // n, n - 1, n - 2, ..., 1 → 1, 2, 3, 4, 5, 6.
+        if (i < 0) {
+            reverse(nums, 0);
+            return;
+        }
 
-        // 3. merge result.
-        root.mergeToArray(nums);
+        final int num = nums[i];
+        int j = n - 1;
+        while (j >= 0 && num >= nums[j]) j--;
+        swap(nums, i, j);
+        reverse(nums, i + 1);
     }
-    
-    static final class TreeNode {
-        TreeNode sonNode;
-        TreeNode fatherNode;
 
-        int num;
-        int nth;
+    public void swap(int[] nums, int i, int j) {
+        final int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
 
-        /**
-         * integer list sorted in ascending order.
-         * which represent all the possible values of current node.
-         */
-        final List<Integer> possibleValues; 
-        final int size;
-
-        TreeNode(List<Integer> possibleValues, int[] nums, final int index, TreeNode fatherNode) {
-            this.fatherNode = fatherNode;
-
-            // 1. set node value.
-            num = nums[index];
-
-            // 2. defensive copying.
-            this.possibleValues = Collections.unmodifiableList(new ArrayList<>(possibleValues)); 
-            size = possibleValues.size();
-
-            // 3. nth in possibleValues.
-            int tempNth = -1;
-            for (int i = 0; i < possibleValues.size(); i++) {
-                final int possibleValue = possibleValues.get(i);
-                if (possibleValue == num) {
-                    tempNth = i;
-                    break;
-                }
-            }
-            nth = tempNth;
-            
-            if (size > 1) {
-                possibleValues.remove(nth);
-                sonNode = new TreeNode(possibleValues, nums, index + 1, this);
-            } else {
-                sonNode = null;
-            }
+    public int[] reverse(int[] nums, int start) {
+        int left = start, right = nums.length - 1;
+        while (left < right) {
+            swap(nums, left, right);
+            left++;
+            right--;
         }
-        
-        TreeNode(List<Integer> possibleValues, TreeNode fatherNode) {
-            this.fatherNode = fatherNode;
-
-            // 1. set node value.
-            num = possibleValues.get(0);
-
-            // 2. defensive copying.
-            this.possibleValues = Collections.unmodifiableList(new ArrayList<>(possibleValues)); 
-            size = possibleValues.size();
-
-            // 3. nth in possibleValues.
-            nth = 0;
-            
-            if (size > 1) {
-                possibleValues.remove(nth);
-                sonNode = new TreeNode(possibleValues, this);
-            } else {
-                sonNode = null;
-            }
-        }
-
-        boolean nextPermutation() {
-            if (sonNode != null) {
-                if (sonNode.nextPermutation() == true) {
-                    return true; // status change succeed.
-                }
-            }
-
-            // leaf node can not do anything.
-            if (size == 1) {
-                return false;
-            }
-
-            // current layer do not has next possible value.
-            if (nth == size - 1) {
-                if (this.fatherNode != null) {
-                    return false;
-                }
-                
-                // if top level node. (has no father node)
-                nth = -1; // see nth++;
-            }
-
-            // move next.
-            final List<Integer> possibleValues = new LinkedList<>(this.possibleValues);
-            
-            final Integer currentNum = this.num; // boxing
-            // skip same value.
-            for (int i = nth + 1; i < possibleValues.size(); i++) {
-                if (possibleValues.get(i).compareTo(currentNum) == 0) {
-                    continue;
-                }
-
-                // change node status
-                nth = i;
-                num = possibleValues.get(nth);
-                possibleValues.remove(nth);
-                this.sonNode = new TreeNode(possibleValues, fatherNode);
-                return true; // status change failed. ask father node to do this job.
-            }
-
-            return false;
-        }
-
-        void mergeToArray(int[] result) {
-            TreeNode currentNode = this;
-            int index = 0;
-            
-            while (currentNode != null) {
-                result[index] = currentNode.num;
-
-                currentNode = currentNode.sonNode;
-                index++;
-            }
-        }
-
-        static TreeNode CreateRootNode(int[] nums) {
-            // 1. copy then sort in ascending order.
-            final int[] copyOfNums = Arrays.copyOf(nums, nums.length);
-            final int[] sortedNums = Arrays.copyOf(nums, nums.length);
-            Arrays.sort(sortedNums);
-
-            List<Integer> possibleValues = 
-                IntStream.of(sortedNums)
-                    .boxed()
-                    .collect(Collectors.toList());
-            // [Performance optimization] Convert To Linked List.
-            possibleValues = new LinkedList<>(possibleValues);
-            final TreeNode node = new TreeNode(possibleValues, copyOfNums, 0, null);
-            possibleValues = null;
-            return node;
-        }
+        return nums;
     }
 
     public static void main(String[] args) {
