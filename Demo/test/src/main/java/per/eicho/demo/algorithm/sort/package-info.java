@@ -36,8 +36,13 @@
  *   </tr>
  *   <tr>
  *      <td>8</td>
- *      <td>{@link per.eicho.demo.algorithm.sort.QuickAscendingSort 快速排序}</td>
+ *      <td>{@link per.eicho.demo.algorithm.sort.QuickAscendingSort 快速排序 (单基准值快速排序)}</td>
  *   </tr>
+ *   <tr>
+ *      <td>9</td>
+ *      <td>{@link per.eicho.demo.algorithm.sort.DualPivotQuickSort 稳定快排 (双基准值快速排序)}</td>
+ *   </tr>
+ *   
  * </table>
  * 
  */
