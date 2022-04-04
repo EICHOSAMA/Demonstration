@@ -34,6 +34,10 @@
  *      <td>7</td>
  *      <td>{@link per.eicho.demo.algorithm.sort.SelectionAscendingSort 选择排序}</td>
  *   </tr>
+ *   <tr>
+ *      <td>8</td>
+ *      <td>{@link per.eicho.demo.algorithm.sort.QuickAscendingSort 快速排序}</td>
+ *   </tr>
  * </table>
  * 
  */
