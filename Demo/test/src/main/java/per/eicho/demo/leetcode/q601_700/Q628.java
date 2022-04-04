@@ -9,6 +9,8 @@ import java.util.Arrays;
  */
 public final class Q628 {
     public int maximumProduct(int[] nums) {
+        // 1. 3 <= nums.length <= 10^4
+        // 2. -1000 <= nums[i] <= 1000        
         Arrays.sort(nums);
         
         // Last Index & First Index
