@@ -16,19 +16,21 @@ public final class Q1721 {
         ListNode cursor = head;
         
         ListNode firstNode = head;
-        ListNode lastNode = head;
+        
         
         int count = 0;
-        while (cursor != null) {
+        while (count < k) {
             count++;
-            if (count < k) {
-                firstNode = firstNode.next;
-            } else if (count > k) {
-                lastNode = lastNode.next;
-            }
             cursor = cursor.next;
         }
-        
+        firstNode = cursor;
+
+        ListNode lastNode = head;
+        while (cursor.next != null) {
+            cursor = cursor.next;
+            lastNode = lastNode.next;
+        }
+
         if (firstNode == lastNode) return head;
 
         firstNode.val ^= lastNode.val;
