@@ -7,23 +7,22 @@ package per.eicho.demo.leetcode.q001_100;
  */
 public final class Q11 {
     public int maxArea(int[] height) {
-        final int len = height.length;
+        // 1. n == height.length
+        // 2. 2 <= n <= 10^5
+        // 3. 0 <= height[i] <= 10^4        
+        final int n = height.length;
 
-        int temp;
-        int max = 0;
-
-        int l, r;
-        for (int i = 0; i < len - 1; i++) {
-            l = height[i];
-            for (int j = i + 1; j < len; j++) {
-                r = height[j];
-                temp = (j - i) * Math.min(l, r);
-                if (temp > max) {
-                    max = temp;
-                }
+        int l = 0, r = n - 1;
+        int hL = height[l], hR = height[r];
+        int result = 0;
+        while (l != r) {
+            result = Math.max(result, Math.min(hL, hR) * (r - l));
+            if (hL < hR) {
+                hL = height[++l];
+            } else {
+                hR = height[--r];
             }
         }
-
-        return max;   
+        return result;   
     }
 }
