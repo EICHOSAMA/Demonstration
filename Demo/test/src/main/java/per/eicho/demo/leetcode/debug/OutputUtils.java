@@ -5,6 +5,23 @@ import java.util.List;
 import per.eicho.demo.leetcode.datastructure.ListNode;
 
 public final class OutputUtils {
+
+    public static void println(int[] nums) {
+        if (nums == null) {
+            System.out.println("null");
+            return;
+        }
+
+        System.out.print("[");
+        if (nums.length > 0) {
+            for (int i = 0; i < nums.length - 1; i++) {
+                System.out.print(nums[i]);
+                System.out.print(",");
+            }
+            System.out.print(nums[nums.length - 1]);
+        }
+        System.out.println("]");
+    }
     
     public static void println(String[] strings) {
         if (strings.length == 0) {
