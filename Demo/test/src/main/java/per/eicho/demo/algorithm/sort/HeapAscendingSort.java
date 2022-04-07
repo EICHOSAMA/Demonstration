@@ -15,28 +15,20 @@ public final class HeapAscendingSort extends AbstractAscendingSort {
         for (int i = (n / 2) - 1 ; i >= 0; i--) heapify(nums, i, n);
         
         for (int i = n - 1; i > 0; i--) {
-            final int temp = nums[i];
-            nums[i] = nums[0];
-            nums[0] = temp;
-
+            swap(nums, i, 0);
             heapify(nums, 0, i);
         }
     }
 
     private void heapify(int[] nums, int current, int bound) {
-        int father = current;
-        int son = father * 2 + 1;
-        while (son < bound) {
-            if (son + 1 < bound && nums[son] < nums[son + 1]) son++; // 选择右儿子做代表 (右儿子更大)
-            if (nums[father] > nums[son]) break;
+        int son, father = current;
+        while ((son = father * 2 + 1) < bound) {
+            if (son + 1 < bound && nums[son] < nums[son + 1]) son++; // 如果右儿子存在且更大，选择右儿子做代表 
+            if (nums[father] > nums[son]) break; // 父亲大于两个儿子则停止调整处理
 
-            // Swap
-            final int temp = nums[father];
-            nums[father] = nums[son];
-            nums[son] = temp;
+            swap(nums, father, son);
 
             father = son;
-            son = father * 2 + 1;
         }
     }    
 }
