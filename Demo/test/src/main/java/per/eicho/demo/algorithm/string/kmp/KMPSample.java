@@ -1,4 +1,4 @@
-package per.eicho.demo.algorithm.kmp;
+package per.eicho.demo.algorithm.string.kmp;
 
 /**
  * <p>KMP实例类</p>
