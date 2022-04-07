@@ -12,35 +12,23 @@ import per.eicho.demo.leetcode.datastructure.TreeNode;
  */
 public final class Q337 {
 
-    Map<TreeNode, Map<Boolean, Integer>> f = new HashMap<>();
+    private static final int ROBBED = 0;
+    private static final int NOT_ROBBED = 1;
 
     public int rob(TreeNode root) {
         // 1. The number of nodes in the tree is in the range [1, 10^4].
         // 2. 0 <= Node.val <= 10^4        
-        // rob current or not.
-        return rob(root, Boolean.TRUE);
+        // rob current or not.        
+        int[] f = dfs(root);
+        return Math.max(f[ROBBED], f[NOT_ROBBED]);
     }
 
-    public int rob(TreeNode node, Boolean canRob) {
-        if (node == null) return 0;
-
-        if (f.containsKey(node) && f.get(node).containsKey(canRob)) return f.get(node).get(canRob);
-        if (!f.containsKey(node)) f.put(node, new HashMap<>());
-        
-        int result;
-        if (f.containsKey(node) && f.get(node).containsKey(Boolean.FALSE)) {
-            result = f.get(node).get(Boolean.FALSE); 
-        } else {
-            result = rob(node.left, true) + rob(node.right, true);
-            f.get(node).put(Boolean.FALSE, result);
-        }
-
-
-        if (canRob) {
-            result = Math.max(result, node.val + rob(node.left, false) + rob(node.right, false));
-            f.get(node).put(Boolean.TRUE, result);
-        }
-
-        return result;
+    public int[] dfs(TreeNode node) {
+        if (node == null) return new int[]{0, 0};
+        final int[] l = dfs(node.left);
+        final int[] r = dfs(node.right);
+        return new int[]{
+            node.val + l[NOT_ROBBED] + r[NOT_ROBBED], 
+            Math.max(l[ROBBED], l[NOT_ROBBED]) + Math.max(r[ROBBED], r[NOT_ROBBED])};
     }
 }
