@@ -1,6 +1,6 @@
 package per.eicho.demo.leetcode.q001_100;
 
-import per.eicho.demo.algorithm.kmp.KMPSample;
+import per.eicho.demo.algorithm.string.kmp.KMPSample;
 
 /**
  * <p>28. Implement strStr() 的题解代码 </p>
