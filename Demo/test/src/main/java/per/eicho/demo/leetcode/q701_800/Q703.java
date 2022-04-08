@@ -1,9 +1,5 @@
 package per.eicho.demo.leetcode.q701_800;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * <p>703. Kth Largest Element in a Stream 的题解代码 </p>
  * 
@@ -13,15 +9,56 @@ public final class Q703 {
     private static class KthLargest {
 
         private final int k; 
-        private final List<Integer> nums = new LinkedList<>();
+
+        private final int[] minHeap;
+        int size = 0;
 
         public KthLargest(int k, int[] nums) {
-            Arrays.sort(nums);
-
+            // 1. 1 <= k <= 10^4
+            // 2. 0 <= nums.length <= 10^4
+            // 3. -10^4 <= nums[i] <= 10^4
+            minHeap = new int[k];
             for (int num : nums) {
-                this.nums.add(num);
+                if (size < k) {
+                    minHeap[size] = num;
+                    shiftUp(minHeap, size++);
+                    continue;
+                }
+
+                if (num <= minHeap[0]) continue;
+
+                minHeap[0] = num;
+                heapify(minHeap, 0, size);
             }
             this.k = k;
+        }
+
+        private void heapify(int[] minHeap, int p, int bound) {
+            int son;
+            while ((son = p * 2 + 1) < bound) {
+                if (son + 1 < bound && minHeap[son + 1] < minHeap[son]) son++;
+                if (minHeap[p] < minHeap[son]) break;
+
+                swap(minHeap, p, son);
+                p = son;
+            }
+        }
+
+        private void shiftUp(int[] minHeap, int p) {
+            int father;
+            while (p > 0) {
+                father = (p - 1) / 2;
+
+                if (minHeap[father] < minHeap[p]) break;
+                swap(minHeap, father, p);
+                p = father;
+            }
+        }
+
+        private void swap(int[] minHeap, int i, int j) {
+            final int temp = minHeap[i];
+            minHeap[i] = minHeap[j];
+            minHeap[j] = temp;
         }
         
         /**
@@ -34,37 +71,25 @@ public final class Q703 {
          * @return kth largest element
          */
         public int add(int val) {
-            final Integer iVal = val;
-
-            if (nums.size() == 0 || iVal < nums.get(0)) {
-                nums.add(0, iVal);
-            } else if (iVal > nums.get(nums.size() - 1)) {
-                nums.add(iVal);
-            } else {
-                final int index = binarySearch(iVal, 0, nums.size() - 1);    
-                nums.add(index + 1, iVal);    
+            if (size < k) {
+                minHeap[size] = val;
+                shiftUp(minHeap, size++);
+                return minHeap[0];
             }
-            return nums.get(nums.size() - k);
-        }
 
-        private int binarySearch(final Integer val, int l, int r) {
-            if (l == r) {
-                return l;
-            }            
-            int mid = (l + r + 1) / 2;
-            final Integer numMid = nums.get(mid);
-
-            if (val < numMid) return binarySearch(val, l, mid - 1);
-            return binarySearch(val, mid, r);
+            if (val < minHeap[0]) return minHeap[0];
+            minHeap[0] = val;
+            heapify(minHeap, 0, size);
+            return minHeap[0];
         }
     }
 
     public static void main(String[] args) {
         KthLargest kthLargest = new KthLargest(3, new int[]{4, 5, 8, 2});
-        kthLargest.add(3);   // return 4
-        kthLargest.add(5);   // return 5
-        kthLargest.add(10);  // return 5
-        kthLargest.add(9);   // return 8
-        kthLargest.add(4);   // return 8
+        System.out.println(kthLargest.add(3));   // return 4
+        System.out.println(kthLargest.add(5));   // return 5
+        System.out.println(kthLargest.add(10));  // return 5
+        System.out.println(kthLargest.add(9));   // return 8
+        System.out.println(kthLargest.add(4));   // return 8
     }
 }
