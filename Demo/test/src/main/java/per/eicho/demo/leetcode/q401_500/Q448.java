@@ -10,35 +10,30 @@ import java.util.List;
  */
 public final class Q448 {
     public List<Integer> findDisappearedNumbers(int[] nums) {
+        // 1. n == nums.length
+        // 2. 1 <= n <= 10^5
+        // 3. 1 <= nums[i] <= n
+        final int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            final int num = nums[i];
+
+            if (num == i + 1) continue;
+            if (nums[num - 1] != num) swap(nums, i--, num - 1);
+        }
+
         final List<Integer> result = new ArrayList<>();
 
-        int i = 0;
-        while (i < nums.length) {
-            // 1 <= nums[i] <= n
-            int num = nums[i];
-
-            if (num == i + 1) {
-                // num placed at right location
-                i++;
-                continue;
-            }
-
-            // num placed at wrong location
-            int temp = nums[num - 1]; // cache.
-            if (temp != num) {
-                nums[num - 1] = num; // place num at right location.
-                nums[i] = temp; //
-            } else {
-                i++;
-                continue;
-            }
-        }
-
-        for (i = 0; i < nums.length; i++) {
-            if (nums[i] != i + 1) {
-                result.add(i + 1);
-            }
+        for (int i = 0; i < n; i++) {
+            final int num = nums[i];
+            if (num == i + 1) continue;
+            result.add(i + 1);
         }
         return result;
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        final int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
