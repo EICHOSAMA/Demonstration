@@ -11,29 +11,25 @@ public final class Q581 {
         // 2. -10^5 <= nums[i] <= 10^5        
         final int n = nums.length;
 
-        int l = n, r = 0; // sort range [l, r)
-
-        int[] monoStack = new int[n]; // save idx info.
-        monoStack[0] = 0;
-        int size = 1;
-        
-        for (int i = 1; i < n; i++) {
-            final int num = nums[i];
-
-            if (num >= nums[monoStack[size - 1]]) {
-                monoStack[size++] = i; // add to mono stack.
-                continue;
+        int max = Integer.MIN_VALUE, r = -1;
+        int min = Integer.MAX_VALUE, l = -1;
+        for (int i = 0, j = n - 1; i < n; i++, j--) {
+            final int numL = nums[i];
+            
+            if (max > numL) {
+                r = i;
+            } else {
+                max = numL;
             }
 
-            final int top = monoStack[size - 1];
-            r = i + 1;
-            while (size > 0 && nums[monoStack[size - 1]] > num) size--;
-            l = Math.min(l, monoStack[size]);
-
-            monoStack[size++] = i;
-            monoStack[size++] = top; 
+            final int numR = nums[j];
+            if (min < numR) {
+                l = j;
+            } else {
+                min = numR;
+            }
         }
-        return l == n ? 0 : r - l;
+        return r == -1 ? 0 : r - l + 1;
     }
 
     public static void main(String[] args) {
