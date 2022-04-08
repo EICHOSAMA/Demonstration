@@ -11,30 +11,33 @@ import java.util.List;
 public final class Q438 {
     public List<Integer> findAnagrams(String s, String p) {
         // 1. 1 <= s.length, p.length <= 3 * 10^4
-        // 2. s and p consist of lowercase English letters.        
+        // 2. s and p consist of lowercase English letters.
         final List<Integer> result = new ArrayList<>();
-        // 1. prepare hash code.
-        int hashCode = 0;
-        for (int i = 0; i < p.length() ; i++) {
-            hashCode += (p.charAt(i) * p.charAt(i) * p.charAt(i));
+        if (s.length() < p.length()) return result;
+
+
+        final int[] counts = new int[26];
+        for (int i = 0; i < p.length(); i++) counts[p.charAt(i) - 'a']++;
+
+        final int[] windowCounts = new int[26];
+        for (int i = 0; i < p.length(); i++) windowCounts[s.charAt(i) - 'a']++;
+
+        int diff = 0;
+        for (int i = 0; i < 26; i++) diff += Math.abs(windowCounts[i] - counts[i]);
+
+        int l = 0, r = p.length(); // [l, r)
+        while (r < s.length()) {
+            if (diff == 0) result.add(l);
+
+            final int charL = s.charAt(l++) - 'a';
+            final int charR = s.charAt(r++) - 'a';
+
+            diff -= Math.abs(counts[charL] - windowCounts[charL]--);
+            diff += Math.abs(counts[charL] - windowCounts[charL]);
+            diff -= Math.abs(counts[charR] - windowCounts[charR]++);
+            diff += Math.abs(counts[charR] - windowCounts[charR]);
         }
-
-        final int lenP = p.length();
-        int hashCode2 = 0;
-        int len = 0;
-        for (int i = 0; i < s.length() ; i++) {
-            len++;
-            hashCode2 += s.charAt(i) * s.charAt(i) * s.charAt(i);
-            if (len > lenP) {
-                len--;
-                hashCode2 -= s.charAt(i - len) * s.charAt(i - len) * s.charAt(i - len);
-            }
-
-            if (hashCode == hashCode2) {
-                result.add(i - len + 1);
-            }
-        }
-
+        if (diff == 0) result.add(l);
         return result;
     }
 }
