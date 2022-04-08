@@ -7,6 +7,7 @@ package per.eicho.demo.leetcode.q401_500;
  */
 public final class Q461 {
     public int hammingDistance(int x, int y) {
+        // 1. 0 <= x, y <= 2^31 - 1
         int n = x ^ y;
         
         int result = 0;
