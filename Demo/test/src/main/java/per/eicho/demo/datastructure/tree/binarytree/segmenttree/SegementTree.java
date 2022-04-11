@@ -1,4 +1,4 @@
-package per.eicho.demo.datastructure.tree.segmenttree;
+package per.eicho.demo.datastructure.tree.binarytree.segmenttree;
 
 /**
  * <p>数据结构 - 线段树</p>

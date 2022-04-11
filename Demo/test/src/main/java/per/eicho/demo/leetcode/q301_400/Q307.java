@@ -1,6 +1,6 @@
 package per.eicho.demo.leetcode.q301_400;
 
-import per.eicho.demo.datastructure.tree.segmenttree.SegementTree;
+import per.eicho.demo.datastructure.tree.binarytree.segmenttree.SegementTree;
 
 /**
  * <p>307. Range Sum Query - Mutable 的题解代码 </p>

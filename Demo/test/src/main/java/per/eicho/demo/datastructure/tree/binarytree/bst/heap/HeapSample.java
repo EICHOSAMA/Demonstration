@@ -1,4 +1,4 @@
-package per.eicho.demo.datastructure.heap;
+package per.eicho.demo.datastructure.tree.binarytree.bst.heap;
 
 import java.util.Arrays;
 
