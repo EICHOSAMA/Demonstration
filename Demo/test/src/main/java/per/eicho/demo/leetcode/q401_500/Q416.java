@@ -1,8 +1,5 @@
 package per.eicho.demo.leetcode.q401_500;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * <p>416. Partition Equal Subset Sum 的题解代码 </p>
  * 
@@ -18,21 +15,28 @@ public final class Q416 {
         if (sum % 2 != 0) return false;
 
         final int half = sum / 2;
-        Set<Integer> possibleSums = new HashSet<>(100);
-        possibleSums.add(0);
-        Set<Integer> nextPossibleSums = new HashSet<>(100);
+        final boolean[] f = new boolean[half + 1];
+        f[0] = true;
+        int max = 0;
 
         for (int num : nums) {
             if (num > half) return false;
 
-            for (Integer possibleSum : possibleSums) {
-                nextPossibleSums.add(possibleSum);
-                if (possibleSum + num <= half) nextPossibleSums.add(possibleSum + num);
-            }
+            for (int i = max; i >= 0; i--) {
+                if (f[i] == false) continue;
 
-            possibleSums = nextPossibleSums;
-            nextPossibleSums = new HashSet<>(possibleSums.size());
+                final int possibleSum = i + num;
+                if (possibleSum <= half) {
+                    f[possibleSum] = true;
+                    max = Math.max(possibleSum, max);
+                }
+            }
         }
-        return possibleSums.contains(half);
+        return f[half];
+    }
+
+    public static void main(String[] args) {
+        Q416 q416 = new Q416();
+        System.out.println(q416.canPartition(new int[]{2,2,3,5}));
     }
 }
