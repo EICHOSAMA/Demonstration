@@ -1,7 +1,5 @@
 package per.eicho.demo.leetcode.q1301_1400;
 
-import java.util.Arrays;
-
 /**
  * <p>1399. Count Largest Group 的题解代码 </p>
  * 
