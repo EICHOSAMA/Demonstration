@@ -7,7 +7,6 @@ package per.eicho.demo.leetcode.q301_400;
  *   376. Wiggle Subsequence</a>
  */
 public final class Q376 {
-
     private static final int UP = 0;
     private static final int DOWN = 1;
 
@@ -22,21 +21,14 @@ public final class Q376 {
             final int num1 = nums[i - 1];
             final int num2 = nums[i];
 
-            if (num1 == num2) {
-                f[i][UP] = f[i - 1][UP];
-                f[i][DOWN] = f[i - 1][DOWN];
-                continue;
-            }
+            f[i][UP] = f[i - 1][UP];
+            f[i][DOWN] = f[i - 1][DOWN];
 
             if (num2 > num1) { // ↑
-                f[i][UP] = Math.max(f[i - 1][UP], f[i - 1][DOWN] + 1);
-                f[i][DOWN] = f[i - 1][DOWN];
-                continue;
+                f[i][UP] = Math.max(f[i][UP], f[i - 1][DOWN] + 1);
+            } else if (num2 < num1) { // num2 < num1, ↓
+                f[i][DOWN] = Math.max(f[i - 1][UP] + 1, f[i][DOWN]);
             }
-            
-            // num2 < num1, ↓
-            f[i][UP] = f[i - 1][UP];
-            f[i][DOWN] = Math.max(f[i - 1][UP] + 1, f[i - 1][DOWN]);
         }
         return Math.max(f[n - 1][UP], f[n - 1][DOWN]);
     }
