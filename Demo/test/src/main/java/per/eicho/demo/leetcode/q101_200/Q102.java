@@ -2,7 +2,9 @@ package per.eicho.demo.leetcode.q101_200;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.stream.Collectors;
 
 import per.eicho.demo.leetcode.datastructure.TreeNode;
@@ -14,34 +16,24 @@ import per.eicho.demo.leetcode.datastructure.TreeNode;
  */
 final public class Q102 {
     public List<List<Integer>> levelOrder(TreeNode root) {
-        final List<List<Integer>> result = new ArrayList<>();
+        final List<List<Integer>> result = new LinkedList<>();
+        if (root == null) return result;
 
-        if (root == null) {
-            return result;
+        final Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            final int count = queue.size();
+            final List<Integer> layer = new ArrayList<>(count);
+            for (int i = 0; i < count; i++) {
+                final TreeNode node = queue.poll();
+                layer.add(node.val);
+
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right); 
+            }
+            result.add(layer);
         }
-
-        List<TreeNode> currentLayer = Arrays.asList(root);
-        while (currentLayer.size() > 0) {
-            final List<Integer> l = currentLayer.stream()
-                .map(node -> node.val)
-                .collect(Collectors.toList());
-
-            result.add(l);
-
-            final List<TreeNode> nextLayer = new ArrayList<>();
-            currentLayer.forEach(node -> {
-                if (node.left != null) {
-                    nextLayer.add(node.left);
-                }
-
-                if (node.right != null) {
-                    nextLayer.add(node.right);
-                }
-            });
-
-            currentLayer = nextLayer;
-        }
-
-        return result;
+        return result;        
     }
 }
