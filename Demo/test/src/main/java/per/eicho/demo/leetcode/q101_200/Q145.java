@@ -1,6 +1,6 @@
 package per.eicho.demo.leetcode.q101_200;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import per.eicho.demo.leetcode.datastructure.TreeNode;
@@ -55,26 +55,54 @@ final public class Q145 {
      * @link https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
      */    
     public List<Integer> postorderTraversal(TreeNode root) {
-        final List<Integer> result = new ArrayList<>();
+        // 1. The number of the nodes in the tree is in the range [0, 100].
+        // 2. -100 <= Node.val <= 100        
+        final LinkedList<Integer> result = new LinkedList<>();
 
-        if (root != null) {
-            dopostorderTraversal(root, result);
+        TreeNode cursor = root;
+        while (cursor != null) {
+            if (hasRightSubTree(cursor)) {
+                // rmn: right most node.
+                TreeNode lmn = findLeftMostNodeOfRightSubTree(cursor);
+
+                if (!isLMNConnected(lmn)) {
+                    result.addFirst(cursor.val);
+                    connectLMN(lmn, cursor);
+                    cursor = cursor.right;
+                } else {
+                    disConnectLMN(lmn);
+                    cursor = cursor.left;
+                }
+            } else {
+                result.addFirst(cursor.val);
+                cursor = cursor.left;
+            }
         }
 
         return result;
+    } 
+
+    private static boolean hasRightSubTree(TreeNode node) {
+        return node.right != null;
+    }
+    
+    private static TreeNode findLeftMostNodeOfRightSubTree(TreeNode root) {
+        TreeNode cursor = root.right;
+        while (cursor.left != null && cursor.left != root) {
+            cursor = cursor.left;
+        }
+        return cursor;
     }
 
-    private void dopostorderTraversal(final TreeNode node, final List<Integer> result) {
-        //assert node != null;
+    private static boolean isLMNConnected(TreeNode leftMostNode) {
+        return leftMostNode.left != null;
+    }
 
-        if (node.left != null) {
-            dopostorderTraversal(node.left, result);
-        }
+    private static void connectLMN(TreeNode leftMostNode, TreeNode root) {
+        leftMostNode.left = root;
+    }
 
-        if (node.right != null) {
-            dopostorderTraversal(node.right, result);
-        }        
-
-        result.add(node.val);
+    private static void disConnectLMN(TreeNode leftMostNode) {
+        leftMostNode.left = null;
     }
 }
