@@ -39,42 +39,66 @@ import per.eicho.demo.leetcode.datastructure.TreeNode;
  */
 final public class Q94 {
 
-    /**
-     * <p>inorder traversal</p>
-     * 
-     * <pre>
-     *  do inorder traversal for the given binary tree.
-     * 
-     *  inorder traversal is a kind of depth first traversals,
-     *  which traversal the tree using left, root, right order. 
-     * </pre>
-     * 
-     * @param root
-     * @return
-     * 
-     * @link https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
-     */
     public List<Integer> inorderTraversal(TreeNode root) {
+        // 1. The number of nodes in the tree is in the range [0, 100].
+        // 2. -100 <= Node.val <= 100        
         final List<Integer> result = new ArrayList<>();
 
-        if (root != null) {
-            doInorderTraversal(root, result);
-        }
+        TreeNode cursor = root;
 
+        while (cursor != null) {
+            if (hasLeftSubTree(cursor)) {
+                TreeNode rmn = findRightMostNodeOfLeftSubTree(cursor);
+                if (!isConnected(rmn)) {
+                    connect(rmn, cursor);
+                    cursor = cursor.left;
+                } else {
+                    // is connected
+                    disConnect(rmn);
+                    result.add(cursor.val);
+                    cursor = cursor.right;
+                }
+            } else {
+                result.add(cursor.val);
+                cursor = cursor.right;
+            }
+        }
         return result;
     }
 
-    private void doInorderTraversal(final TreeNode node, final List<Integer> result) {
-        //assert node != null;
+    private boolean hasLeftSubTree(TreeNode node) {
+        return node.left != null;
+    }
 
-        if (node.left != null) {
-            doInorderTraversal(node.left, result);
+    private TreeNode findRightMostNodeOfLeftSubTree(TreeNode root) {
+        TreeNode cursor = root.left;
+        while (cursor.right != null && cursor.right != root) {
+            cursor = cursor.right;
         }
+        return cursor;
+    }
 
-        result.add(node.val);
+    private boolean isConnected(TreeNode rightMostNode) {
+        return rightMostNode.right != null;
+    }
 
-        if (node.right != null) {
-            doInorderTraversal(node.right, result);
+    private void connect(TreeNode rightMostNode, TreeNode root) {
+        rightMostNode.right = root;
+    }
+
+    private void disConnect(TreeNode rightMostNode) {
+        rightMostNode.right = null;
+    }
+
+    public static void main(String[] args) {
+        Q94 q94 = new Q94();
+
+        TreeNode root = new TreeNode(1);
+        root.right = new TreeNode(2);
+        root.right.left = new TreeNode(3);
+
+        for (Integer num : q94.inorderTraversal(root)) {
+            System.out.println("→" + num);
         }
     }
 }
