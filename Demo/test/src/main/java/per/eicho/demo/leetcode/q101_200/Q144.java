@@ -11,35 +11,55 @@ import per.eicho.demo.leetcode.datastructure.TreeNode;
  * @see <a href="https://leetcode.com/problems/binary-tree-preorder-traversal/">144. Binary Tree Preorder Traversal</a>
  */
 public final class Q144 {
+
     public List<Integer> preorderTraversal(TreeNode root) {
         // 1. The number of nodes in the tree is in the range [0, 100].
-        // 2. -100 <= Node.val <= 100        
-		List<Integer> result = new ArrayList<Integer>();
-		if (root == null) return result;
+        // 2. -100 <= Node.val <= 100           
+        List<Integer> result = new ArrayList<>();
 
-        TreeNode p1 = root, p2 = null;
+        TreeNode cursor = root;
+        while (cursor != null) {
+            if (hasLeftSubTree(cursor)) {
+                // rmn: right most node.
+                TreeNode rmn = findRightMostNodeOfLeftSubTree(cursor);
 
-        while (p1 != null) {
-            p2 = p1.left;
-            if (p2 != null) {
-                // 找到左子树中最右的节点
-                while (p2.right != null && p2.right != p1) p2 = p2.right;
-
-                if (p2.right == null) {
-                    // 如果是第一次那么建立到子树父亲节点的连接(p2.right = p1)。
-					result.add(p1.val); // 前序遍历：输出父节点
-                    p2.right = p1; // 建立连接，方便遍历时传送回父节点。
-                    p1 = p1.left; // 前序遍历：处理左子树
-                    continue;
+                if (!isConnected(rmn)) {
+                    result.add(cursor.val);
+                    connect(rmn, cursor);
+                    cursor = cursor.left;
                 } else {
-                    // 如果是第二次那么断开到父亲节点的连接(p2.right = null)
-                    p2.right = null;
+                    disConnect(rmn);
+                    cursor = cursor.right;
                 }
             } else {
-				result.add(p1.val);
+                result.add(cursor.val);
+                cursor = cursor.right;
             }
-            p1 = p1.right;
         }
-		return result;
+        return result;
+    } 
+    
+    private boolean hasLeftSubTree(TreeNode node) {
+        return node.left != null;
+    }
+
+    private TreeNode findRightMostNodeOfLeftSubTree(TreeNode root) {
+        TreeNode cursor = root.left;
+        while (cursor.right != null && cursor.right != root) {
+            cursor = cursor.right;
+        }
+        return cursor;
+    }
+
+    private boolean isConnected(TreeNode rightMostNode) {
+        return rightMostNode.right != null;
+    }
+
+    private void connect(TreeNode rightMostNode, TreeNode root) {
+        rightMostNode.right = root;
+    }
+
+    private void disConnect(TreeNode rightMostNode) {
+        rightMostNode.right = null;
     }
 }
