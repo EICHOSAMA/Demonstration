@@ -1,7 +1,5 @@
 package per.eicho.demo.leetcode.q101_200;
 
-import java.util.Stack;
-
 import per.eicho.demo.leetcode.datastructure.TreeNode;
 
 /**
@@ -9,40 +7,65 @@ import per.eicho.demo.leetcode.datastructure.TreeNode;
  * 
  * @see <a href="https://leetcode.com/problems/binary-search-tree-iterator/">173. Binary Search Tree Iterator</a>
  */
-@SuppressWarnings("unused")
 public final class Q173 {
     private final static class BSTIterator {
-        final Stack<TreeNode> stack;
-        
+
+        TreeNode cursor;
         /**
          * Initializes an object of the BSTIterator class. The root of the BST is given as part of the constructor. 
          * The pointer should be initialized to a non-existent number smaller than any element in the BST.
          * @param root
          */
         public BSTIterator(TreeNode root) {
-            TreeNode pointer = new TreeNode(Integer.MIN_VALUE, null, root);
-            stack = new Stack<>();
-            
-            addRight(pointer);
+            cursor = genConnection(root);
+        }
+
+        private TreeNode genConnection(TreeNode root) {
+            if (root == null) return null;
+
+            TreeNode p = root;
+            TreeNode helperP;
+            while (hasLeftSubTree(p)) {
+                helperP = findRightMostNodeOfLeftSubTree(p);
+                connect(helperP, p);
+                p = p.left;
+            }
+            return p;
         }
         
         /**
          * Moves the pointer to the right, then returns the number at the pointer.
          */
         public int next() {
-            return addRight(stack.pop());
+            final int result = cursor.val;
+            move2Next();
+            return result;
         }
 
-        private int addRight(TreeNode node) {
-            final int val = node.val;
+        private void move2Next() {
+            cursor = cursor.right;
             
-            node = node.right;
-            while (node != null) {
-                stack.add(node);
-                node = node.left;
+            while (cursor != null) {
+                // case1. has left sub tree.
+                if (hasLeftSubTree(cursor)) {
+                    TreeNode rmn = findRightMostNodeOfLeftSubTree(cursor);
+    
+                    if (!isConnected(rmn)) {
+                        // case1.1 first time access the right most node.
+                        // then connect right most node to root.
+                        connect(rmn, cursor);
+                        cursor = cursor.left;
+                    } else {
+                        // case1.2 second time access the right most node.
+                        // which means the left sub tree has already been traversed.
+                        // then disconnect.
+                        disConnect(rmn);
+                        return; // stop moving.
+                    }
+                } else {
+                    return; // stop moving.
+                }
             }
-
-            return val;
         }
         
         /**
@@ -50,7 +73,51 @@ public final class Q173 {
          * otherwise returns false.
          */
         public boolean hasNext() {
-            return !stack.isEmpty();
+            return cursor != null;
         }
+
+        private boolean hasLeftSubTree(TreeNode node) {
+            return node.left != null;
+        }
+
+        private TreeNode findRightMostNodeOfLeftSubTree(TreeNode root) {
+            TreeNode cursor = root.left;
+            while (cursor.right != null && cursor.right != root) {
+                cursor = cursor.right;
+            }
+            return cursor;
+        }
+
+        private boolean isConnected(TreeNode rightMostNode) {
+            return rightMostNode.right != null;
+        }
+
+        private void connect(TreeNode rightMostNode, TreeNode root) {
+            rightMostNode.right = root;
+        }
+
+        private void disConnect(TreeNode rightMostNode) {
+            rightMostNode.right = null;
+        }
+    }
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(7);
+        root.left = new TreeNode(3);
+        root.right = new TreeNode(15);
+        root.right.left = new TreeNode(9);
+        root.right.right = new TreeNode(20);
+
+        BSTIterator bIterator = new BSTIterator(root);
+
+        System.out.println(bIterator.next()); // 3
+        System.out.println(bIterator.next()); // 7
+        System.out.println(bIterator.hasNext()); // true
+        System.out.println(bIterator.next()); // 9
+        System.out.println(bIterator.hasNext()); // true
+        System.out.println(bIterator.next()); // 15
+        System.out.println(bIterator.hasNext()); // true
+        System.out.println(bIterator.next()); // 20
+        System.out.println(bIterator.hasNext()); // false
     }
 }
