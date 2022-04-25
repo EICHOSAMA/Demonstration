@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
-import per.eicho.demo.algorithm.tree.BinaryTreeTraversalSample;
+import per.eicho.demo.algorithm.tree.binarytree.BinaryTreeTraversalSample;
 import per.eicho.demo.leetcode.datastructure.TreeNode;
 
 /**

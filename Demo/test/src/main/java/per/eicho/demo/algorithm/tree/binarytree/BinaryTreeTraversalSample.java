@@ -1,4 +1,4 @@
-package per.eicho.demo.algorithm.tree;
+package per.eicho.demo.algorithm.tree.binarytree;
 
 import java.util.LinkedList;
 import java.util.Queue;
