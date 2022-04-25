@@ -9,6 +9,7 @@ import java.util.Map;
  * @see <a href="https://leetcode.com/problems/design-underground-system/">
  *   1304. Find N Unique Integers Sum up to Zero</a>
  */
+@SuppressWarnings("unused")
 public final class Q1396 {
     private static class UndergroundSystem {
 
