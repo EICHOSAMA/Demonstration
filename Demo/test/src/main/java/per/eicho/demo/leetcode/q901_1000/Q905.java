@@ -11,12 +11,19 @@ public class Q905 {
         // 1. 1 <= nums.length <= 5000
         // 2. 0 <= nums[i] <= 5000
         final int n = nums.length;
-        final int[] result = new int[n];
-        //Arrays.sort(nums);
-        for (int i = 0, l = 0, r = n - 1; i < n; i++) {
-            int num = nums[i];
-            result[num % 2 == 0 ? l++ : r--] = num;
+        for (int l = 0, r = n - 1; l < r;) {
+            if (nums[l] % 2 == 1) {
+                swap(nums, l, r--);
+            } else {
+                l++;
+            }
         }
-        return result;    
+        return nums;    
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        final int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
