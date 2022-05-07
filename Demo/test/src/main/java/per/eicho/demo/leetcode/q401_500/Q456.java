@@ -1,7 +1,5 @@
 package per.eicho.demo.leetcode.q401_500;
 
-import java.util.Deque;
-import java.util.LinkedList;
 import java.util.Stack;
 
 /**
