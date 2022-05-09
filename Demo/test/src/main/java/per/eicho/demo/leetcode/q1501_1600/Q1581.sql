@@ -2,7 +2,13 @@
 -- https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/
 
 SELECT 
-    * 
+    customer_id, COUNT(customer_id) as 'count_no_trans' 
 FROM
-    Visits
-LEFT JOIN Transactions On visit_id
+    Visits v
+LEFT JOIN 
+    Transactions t On v.visit_id = t.visit_id
+WHERE 
+    amount IS NULL
+GROUP BY 
+    customer_id
+
