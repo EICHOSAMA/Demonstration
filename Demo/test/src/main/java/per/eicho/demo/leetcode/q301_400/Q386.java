@@ -12,33 +12,24 @@ import java.util.List;
 public final class Q386 {
     public List<Integer> lexicalOrder(int n) {
         // 1. 1 <= n <= 5 * 10^4
-        final List<Integer> result = new ArrayList<>(n);
-        for (int i = 1; i <= n; i++) result.add(i);
-
-        result.sort((num1, num2) -> {
-            int cnt1 = count(num1);
-            int cnt2 = count(num2);
-            while (getDigit(num1, cnt1) == getDigit(num2, cnt2)) {
-                cnt1 /= 10;
-                cnt2 /= 10;
+        final List<Integer> result = new ArrayList<>();
+        int num = 1;
+        
+        for (int i = 0; i < n; i++) {
+            result.add(num);
+            if (num * 10 <= n) {
+                num *= 10;
+                continue;
             }
-            return Integer.compare(getDigit(num1, cnt1), getDigit(num2, cnt2));
-        });
 
+            while (lastDigit(num) == 9 || num + 1 > n) num /= 10;
+            num++;
+        }
         return result;
     }
 
-    private int count(int num) {
-        int count = 1;
-        while (num >= count * 10) {
-            count *= 10;
-        }
-        return count;
-    }
-
-    private int getDigit(int num, int cnt) {
-        if (cnt == 0) return -1;
-        return (num / cnt) % 10;
+    private int lastDigit(int num) {
+        return num % 10;
     }
 
     public static void main(String[] args) {
