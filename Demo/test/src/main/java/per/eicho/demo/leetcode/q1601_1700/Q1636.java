@@ -4,6 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * <p>1636. Sort Array by Increasing Frequency 的题解代码 </p>
+ * 
+ * @see <a href="https://leetcode.com/problems/sort-array-by-increasing-frequency/">
+ *   1636. Sort Array by Increasing Frequency</a>
+ */
 public final class Q1636 {
     public int[] frequencySort(int[] nums) {
         // 1. 1 <= nums.length <= 100
