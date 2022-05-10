@@ -25,13 +25,14 @@ public final class Q395 {
         for (int l = 0; l < n; l++) {
             // [l, r]
             if (l - 1 >= 0 && s.charAt(l) == s.charAt(l - 1)) continue; // optimized.
-            int r = l;
-            charCount(charCountInfo, l, r, count);
+            int r = l + result; // optimized;
+            if (r >= n) break;
+            genCountInfoForRange(charCountInfo, l, r, count);
             int need = countNeed(count, k);
             while (r < n) {
                 r += need;
                 if (r < n) {
-                    charCount(charCountInfo, l, r, count);
+                    genCountInfoForRange(charCountInfo, l, r, count);
                     need = countNeed(count, k);
                     if (need != 0) continue;
                     while (++r < n && count[s.charAt(r) - 'a'] > 0);
@@ -46,16 +47,12 @@ public final class Q395 {
         return result;
     }
 
-    private int charCount(int[][] charCountInfo, int l, int r, int[] countRef) {
+    private void genCountInfoForRange(int[][] charCountInfo, int l, int r, int[] countRef) {
         copy2Ref(charCountInfo, r, countRef);        
         if (l - 1 >= 0) {
             int[] count = charCountInfo[l - 1];
             for (int j = 0; j < 26; j++) countRef[j] -= count[j];
         }
-
-        int charCount = 0;
-        for (int i = 0; i < 26; i++) if (countRef[i] > 0) charCount++;
-        return charCount;
     }
 
     private void copy2Ref(int[][] charCountInfo, int i, int[] countRef) {
