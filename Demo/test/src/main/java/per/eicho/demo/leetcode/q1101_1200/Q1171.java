@@ -1,6 +1,7 @@
 package per.eicho.demo.leetcode.q1101_1200;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import per.eicho.demo.leetcode.datastructure.ListNode;
 
@@ -11,12 +12,10 @@ import per.eicho.demo.leetcode.datastructure.ListNode;
  */
 public final class Q1171 {
     public ListNode removeZeroSumSublists(ListNode head) {
-        // The given linked list will contain between 1 and 1000 nodes.
-        // Each node in the linked list has -1000 <= node.val <= 1000.
-
-        // Key: Sum , Val: node
-        HashMap<Integer, ListNode> map = new HashMap<>();
-        ListNode vituralHead = new ListNode(0);
+        // 1. The given linked list will contain between 1 and 1000 nodes.
+        // 2. Each node in the linked list has -1000 <= node.val <= 1000.
+        final Map<Integer, ListNode> map = new HashMap<>(); // Key: Sum , Val: node
+        final ListNode vituralHead = new ListNode(0);
         vituralHead.next = head;
         map.put(0, vituralHead);
 
@@ -27,7 +26,9 @@ public final class Q1171 {
             sum += cursor.val;
             final Integer iSum = sum;
 
-            if (map.containsKey(iSum)) {
+            if (!map.containsKey(iSum)) {
+                map.put(iSum, cursor);
+            } else {
                 final ListNode node = map.get(iSum);
                 
                 ListNode delCursor = node.next;
@@ -39,9 +40,6 @@ public final class Q1171 {
                     map.remove(delSum);
                     delCursor = delCursor.next;
                 }
-
-            } else {
-                map.put(iSum, cursor);
             }
 
             cursor = cursor.next;
