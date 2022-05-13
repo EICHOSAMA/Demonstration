@@ -1,8 +1,5 @@
 package per.eicho.demo.leetcode.q101_200;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 import per.eicho.demo.leetcode.datastructure.Node;
 
 /**
@@ -14,8 +11,6 @@ public final class Q117 {
     public Node connect(Node root) {
         // 1. The number of nodes in the tree is in the range [0, 6000].
         // 2. -100 <= Node.val <= 100
-        if (root == null) return null;
-        
         Node cursor = root;
         final Node vituralHead = new Node(-101);
         Node tail = vituralHead; // vitural
