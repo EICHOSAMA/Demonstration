@@ -18,12 +18,11 @@ public final class Q1379 {
         if (original == target) return cloned;
         TreeNode result = getTargetCopy2(original.left, cloned.left, target);
         if (result != null) return result;
-        result = getTargetCopy2(original.right, cloned.right, target);
-        return result;
+        return getTargetCopy2(original.right, cloned.right, target);
     }
 
     public final TreeNode getTargetCopy(final TreeNode original, final TreeNode cloned, final TreeNode target) {
-        // [NOTICE] : LeetCode BUG make this MorrisTraversal Solution Get TLE error
+        // [NOTICE] : LeetCode BUG cause this MorrisTraversal Solution Get TLE error
         //            PLEASE FIX IT. (RUNNING PERFECTLY AT LOCAL ENV.)
         // 1. The number of nodes in the tree is in the range [1, 10^4].
         // 2. The values of the nodes of the tree are unique.
@@ -62,6 +61,7 @@ public final class Q1379 {
         return cursorClone;
     }
 
+    @SuppressWarnings("unused")
     public static void main(String[] args) {
         Q1379 q1379 = new Q1379();
         TreeNode root1 = new TreeNode(1);
