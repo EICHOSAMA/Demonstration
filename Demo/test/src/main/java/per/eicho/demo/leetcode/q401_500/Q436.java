@@ -38,7 +38,7 @@ public final class Q436 {
     }
 
     private int binarySearch(int[][] intervals, int l, int r, int target) {
-        if (l == r) return intervals[1];
+        if (l == r) return intervals[l][1];
         
         int mid = (l + r) / 2;
         int midStart = intervals[mid][0];
