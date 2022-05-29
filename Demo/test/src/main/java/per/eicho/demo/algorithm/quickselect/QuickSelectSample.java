@@ -12,7 +12,7 @@ package per.eicho.demo.algorithm.quickselect;
  *  有O(n) - O(n log n)的平均复杂度和O(n^2)的最坏时间复杂度。
  * </pre>
  */
-final class QuickSelectSample {
+public final class QuickSelectSample {
 
     private void swap(int[] nums, int i, int j) {
         final int temp = nums[i];
