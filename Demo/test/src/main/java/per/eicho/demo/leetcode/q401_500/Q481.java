@@ -1,8 +1,5 @@
 package per.eicho.demo.leetcode.q401_500;
 
-import java.util.Deque;
-import java.util.LinkedList;
-
 /**
  * <p>481. Magical String 的题解代码 </p>
  * 
