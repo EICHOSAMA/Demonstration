@@ -17,8 +17,7 @@ public final class Q752 {
         // 2. deadends[i].length == 4
         // 3. target.length == 4
         // 4. target will not be in the list deadends.
-        // 5. target and deadends[i] consist of digits only.        
-        final int n = deadends.length;
+        // 5. target and deadends[i] consist of digits only.
         final Map<String, Integer> dis = new HashMap<>();
         for (String deadend : deadends) dis.put(deadend, -1);
         if (dis.containsKey("0000")) return -1;
