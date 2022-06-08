@@ -14,7 +14,7 @@ public final class Q649 {
         // 1. n == senate.length
         // 2. 1 <= n <= 10^4
         // 3. senate[i] is either 'R' or 'D'.
-        final Character R = 'R';
+        // final Character R = 'R';
         final Character D = 'D';
 
         Deque<Character> currentRound = new LinkedList<>();
