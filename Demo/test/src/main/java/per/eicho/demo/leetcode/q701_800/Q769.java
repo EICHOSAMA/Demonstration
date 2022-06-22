@@ -13,7 +13,7 @@ public final class Q769 {
         // 3. 0 <= arr[i] < n
         // 4. All the elements of arr are unique.
         final int n = arr.length;
-        int l = 0, r = arr[0];
+        int r = arr[0];
         int result = 1;
         for (int i = 0; i < n; i++) {
             int num = arr[i];
@@ -22,7 +22,6 @@ public final class Q769 {
             }
 
             if (i == r && r + 1 < n) {
-                l = r + 1;
                 r = arr[i + 1];
                 result++;
             }
