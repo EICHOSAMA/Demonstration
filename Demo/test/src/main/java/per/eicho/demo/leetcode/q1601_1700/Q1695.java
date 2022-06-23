@@ -1,4 +1,4 @@
-package per.eicho.demo.leetcode.q601_700;
+package per.eicho.demo.leetcode.q1601_1700;
 
 import java.util.HashSet;
 import java.util.Set;
