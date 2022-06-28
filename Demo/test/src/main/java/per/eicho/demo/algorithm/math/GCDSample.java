@@ -11,8 +11,8 @@ package per.eicho.demo.algorithm.math;
  * 
  * @see <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm">Euclidean algorithm</a>
  */
-final class GCDSample {
-    static int gcd(int num1, int num2) {
+public final class GCDSample {
+    public static int gcd(int num1, int num2) {
         int temp;
         while (num2 != 0) {
             temp = num2;
@@ -21,4 +21,6 @@ final class GCDSample {
         }
         return num1;
     }
+
+    private GCDSample() {}
 }
