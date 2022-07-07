@@ -7,19 +7,16 @@ package per.eicho.demo.leetcode.q001_100;
  */
 public final class Q97 {
     public boolean isInterleave(String s1, String s2, String s3) {
-        /**
-         * 0 <= s1.length, s2.length <= 100
-         * 0 <= s3.length <= 200
-         * s1, s2, and s3 consist of lowercase English letters.
-         */
+        // 1. 0 <= s1.length, s2.length <= 100
+        // 2. 0 <= s3.length <= 200
+        // 3. s1, s2, and s3 consist of lowercase English letters.
         final int len1 = s1.length();
         final int len2 = s2.length();
         final int len3 = s3.length();
         
-        // 1. check Length
         if (len1 + len2 != len3) return false;
         
-        boolean f[] = new boolean[len2 + 1];
+        final boolean f[] = new boolean[len2 + 1];
         
         f[0] = true;
         for (int j = 1; j < len2; j++) {
