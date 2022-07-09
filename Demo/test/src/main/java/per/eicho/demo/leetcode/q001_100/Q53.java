@@ -11,16 +11,15 @@ public final class Q53 {
     public int maxSubArray(int[] nums) {
         // 1. 1 <= nums.length <= 10^5
         // 2. -10^4 <= nums[i] <= 10^4        
-        int max = Arrays.stream(nums).min().orElse(0);
-        int now = 0; // start with 0.
-
-
-        for (int numi: nums) {
-            now += numi;
-            if (now < numi) now = numi;
-            if (now > max) max = now; // record max;
+        final int n = nums.length;
+        int result = nums[0];
+        int f = nums[0];
+        for (int i = 1; i < n; i++) {
+            final int num = nums[i];
+            f = Math.max(f + num, num);
+            result = Math.max(result, f);
         }
 
-        return max;
+        return result;
     }
 }
