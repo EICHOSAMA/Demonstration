@@ -3,6 +3,12 @@ package per.eicho.demo.leetcode.q901_1000;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <p>932. Beautiful Array 的题解代码 </p>
+ * 
+ * @see <a href="https://leetcode.com/problems/beautiful-array/">
+ *   932. Beautiful Array</a>
+ */
 public final class Q932 {
     
     Map<Integer, int[]> memo;
