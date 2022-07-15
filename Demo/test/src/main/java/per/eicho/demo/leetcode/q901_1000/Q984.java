@@ -16,25 +16,30 @@ public final class Q984 {
 
     private String strWithout3a3b(int countA, int countB, char a, char b) {
         // assert countA >= countB;
-        final StringBuilder sb = new StringBuilder(countA + countB);
-        final String aab = "" + a + a + b;
+        final char[] chars = new char[countA + countB];
+        int p = 0;
         while (countA > countB && countB > 0) {
-            sb.append(aab);
+            chars[p++] = a;
+            chars[p++] = a;
+            chars[p++] = b;
             countA -= 2;
             countB -= 1;
         }
 
-        while (countA > 0) {
-            sb.append(a);
-            countA--;
-
-            if (countB > 0) {
-                sb.append(b);
-                countB--;
+        if (countB == 0) {
+            while (countA > 0) {
+                chars[p++] = a;
+                countA--;
+            }
+        } else {
+            while (countA > 0) {
+                chars[p++] = a;
+                chars[p++] = b;
+                countA--;
             }
         }
 
-        return sb.toString();
+        return new String(chars);
     }
 
     public static void main(String[] args) {
