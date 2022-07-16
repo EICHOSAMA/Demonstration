@@ -7,6 +7,10 @@ import java.util.function.IntConsumer;
  * 
  * @see <a href="https://leetcode.com/problems/print-zero-even-odd/">
  *   1116. Print Zero Even Odd</a>
+ * @see <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Object.html">
+ *   [Oracle Java SE8 Doc] Object Class</a>
+ * @see <a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/atomic.html">
+ *   [Oracle Java Tutorials] Atomic Access</a>
  */
 public final class Q1116UsingSynchronized {
     class ZeroEvenOdd {
