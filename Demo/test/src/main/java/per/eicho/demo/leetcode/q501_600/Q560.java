@@ -1,7 +1,6 @@
 package per.eicho.demo.leetcode.q501_600;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -13,45 +12,18 @@ public final class Q560 {
     public int subarraySum(int[] nums, int k) {
         // 1. 1 <= nums.length <= 2 * 10^4
         // 2. -1000 <= nums[i] <= 1000
-        // 3. -10^7 <= k <= 10^7        
-        
+        // 3. -10^7 <= k <= 10^7
         final int n = nums.length;
-
-        // 1. main process
-        // Map<sum, LinkedList<0based-Index>>
-        final Map<Integer, LinkedList<Integer>> map = new HashMap<>(n);
-        final int[] sums = new int[n];
-        sums[0] = nums[0];
-        int sum = 0;
+        final Map<Integer, Integer> map = new HashMap<>();
+        int count = 0, sum = 0;
+        map.put(0, 1);
         for (int i = 0; i < n; i++) {
             sum += nums[i];
-            sums[i] = sum;
-
-            // save info to map.
-            final Integer iSum = sum;
-            if (!map.containsKey(iSum)) {
-                map.put(iSum, new LinkedList<>());
-            }
-
-            map.get(iSum).addLast(i);
+            final Integer target = sum - k;
+            if (map.containsKey(target)) count += map.get(target);
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
         }
-
-        int result = 0;
-        sum = 0;
-        for (int i = 0; i < n; i++) {
-            final int offset = k + sum;
-            final Integer iOffset = offset;
-
-            if (map.containsKey(iOffset)) {
-                result += map.get(iOffset).size();
-            }
-            
-            // remove current idx.
-            sum += nums[i];
-            map.get(sum).removeFirst();
-        }
-        
-        return result;
+        return count;
     }
 
     public static void main(String[] args) {
