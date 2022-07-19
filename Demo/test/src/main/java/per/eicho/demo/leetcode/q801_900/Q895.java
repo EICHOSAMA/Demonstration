@@ -4,6 +4,7 @@ import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Stack;
 import java.util.TreeMap;
 
 /**
@@ -16,60 +17,26 @@ import java.util.TreeMap;
 public final class Q895 {
     private static final class FreqStack {
 
-        private static final class Info {
-            final int num;
-            final LinkedList<Integer> ids;
+        // <num, freq>
+        final Map<Integer, Integer> num2FreqMap;
 
-            Info(int num) {
-                this.num = num;
-                ids = new LinkedList<>();
-            }
-
-            void append(int idx) {
-                ids.addLast(idx);
-            }
-
-            int size() {
-                return ids.size();
-            }
-        }
-
-        int id = 0; // sort key.
-        int maxSize = 0;
-        // <Len, TreeMap<Id, Info>>
-        final Map<Integer, TreeMap<Integer, Info>> map; 
-        // <Num, Info>
-        final Map<Integer, Info> num2InfoMap;
+        // <freq, Stack<Same Freq Number>>
+        final Map<Integer, Stack<Integer>> group;
+        int maxFreq;
 
         /** constructs an empty frequency stack. */
         public FreqStack() {
-            map = new HashMap<>();
-            num2InfoMap = new HashMap<>();
+            num2FreqMap = new HashMap<>();
+            group = new HashMap<>();
         }
         
         /** pushes an integer val onto the top of the stack. */
         public void push(int val) {
-            final int newSize;
-            final Info info;
-            if (!num2InfoMap.containsKey(val)) {
-                info = new Info(val);
-                info.append(id++);
-                num2InfoMap.put(val, info);
-                
-                newSize = info.size();
-            } else {
-                info = num2InfoMap.get(val);
-                final int oldSize = info.size();
-                map.get(oldSize).remove(info.ids.peekLast());
-                
-                info.append(id++);
-                newSize = info.size();
-            }
-
-            if (!map.containsKey(newSize)) map.put(newSize, new TreeMap<>());
-            final Map<Integer, Info> sameSizeId2InfoTreeMap = map.get(newSize);
-            sameSizeId2InfoTreeMap.put(info.ids.peekLast(), info);
-            if (newSize > maxSize) maxSize = newSize;
+            final int iFreq = num2FreqMap.getOrDefault(val, 0) + 1;
+            num2FreqMap.put(val, iFreq);
+            if (iFreq > maxFreq) maxFreq = iFreq;
+    
+            group.computeIfAbsent(iFreq, key -> new Stack<>()).push(val);
         }
         
         /** 
@@ -80,32 +47,9 @@ public final class Q895 {
         public int pop() {
             // It is guaranteed that there will 
             // be at least one element in the stack before calling pop.
-            final TreeMap<Integer, Info> sameSizeId2InfoTreeMap = map.get(maxSize);
-
-            final Integer id = sameSizeId2InfoTreeMap.lastKey();
-            final Info info = sameSizeId2InfoTreeMap.pollLastEntry().getValue();
-
-            final int num = info.num;
-            final int oldSize = info.size();
-            info.ids.pollLast();
-            final int newSize = info.size();
-
-            if (sameSizeId2InfoTreeMap.size() == 0) {
-                map.remove(oldSize);
-                maxSize = newSize;
-            }
-
-            System.out.println("pop:" + num + " MaxSize:" + maxSize);
-
-            if (newSize == 0) {
-                num2InfoMap.remove(num);
-                return num;
-            }
-
-            // maintain new same size map.
-            if (!map.containsKey(newSize)) map.put(newSize, new TreeMap<>());
-            final Map<Integer, Info> newSameSizeId2InfoTreeMap = map.get(newSize);
-            newSameSizeId2InfoTreeMap.put(info.ids.peekLast(), info);
+            final int num = group.get(maxFreq).pop();
+            num2FreqMap.put(num, num2FreqMap.get(num) - 1); // maintain freq info.
+            if (group.get(maxFreq).size() == 0) maxFreq--; // maintain max freq info.
             return num;
         }
     }
