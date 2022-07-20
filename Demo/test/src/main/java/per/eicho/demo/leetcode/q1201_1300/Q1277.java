@@ -24,8 +24,7 @@ public final class Q1277 {
             }
         }
 
-        int result = matrix[m - 1][n - 1];
-        System.out.println(result);
+        int result = sumMat[m - 1][n - 1];
         for (int edgeLen = 2, maxLen = Math.min(m, n); edgeLen <= maxLen; edgeLen++) {
             final int target = edgeLen * edgeLen;
             for (int x1 = 0, boundX = m - edgeLen; x1 <= boundX; x1++) {
@@ -47,5 +46,4 @@ public final class Q1277 {
         final int area4 = x1 * y1 == 0 ? 0 : sumMat[x1 - 1][y1 - 1];
         return area1 + area4 - area2 - area3;
     }
-
 }
