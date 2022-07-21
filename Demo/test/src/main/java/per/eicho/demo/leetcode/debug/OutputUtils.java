@@ -36,6 +36,19 @@ public final class OutputUtils {
         System.out.println(strings[strings.length - 1]);
     }
 
+    public static void println(double[] strings) {
+        if (strings.length == 0) {
+            System.out.println();
+            return;
+        }
+
+        for (int i = 0; i < strings.length - 1; i++) {
+            System.out.print(strings[i]);
+            System.out.print(" ,");
+        }
+        System.out.println(strings[strings.length - 1]);
+    }
+
     public static void println(List<String> strings) {
         if (strings == null) {
             System.out.println("null");
