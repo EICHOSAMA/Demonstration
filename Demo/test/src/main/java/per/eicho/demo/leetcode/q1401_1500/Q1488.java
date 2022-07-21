@@ -39,7 +39,6 @@ public final class Q1488 {
             } else {
                 if (lakeMap.containsKey(lake)) {
                     // need to find a day to dry this ${lake} lake.
-                    // TODO.
                     final int preDate = lakeMap.put(lake, i);
                     if (zeroIdxList.size() == 0) return new int[]{};
                     if (zeroIdxList.peekLast() < preDate) return new int[]{};
