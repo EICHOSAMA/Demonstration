@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import per.eicho.demo.leetcode.datastructure.TreeNode;
 
@@ -43,7 +44,7 @@ public final class Q987 {
                 if (i1.row != i2.row) return Integer.compare(i1.row, i2.row);
                 return Integer.compare(i1.val, i2.val);
             });
-            result.add(values.stream().map(info -> info.val).toList());
+            result.add(values.stream().map(info -> info.val).collect(Collectors.toList()));
         }
 
         return result;
