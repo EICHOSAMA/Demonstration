@@ -56,5 +56,20 @@ public final class InputUtils {
         return data;
     }
 
+    public static final int[][] gen2DArray(String dataStr) {
+        final List<List<Integer>> list = gen2DList(dataStr);
+        final int m = list.size();
+        int[][] array = new int[m][];
+        for (int i = 0; i < m; i++) {
+            final List<Integer> row = list.get(i);
+            final int n = row.size();
+            array[i] = new int[n];
+
+            for (int j = 0; j < n; j++) array[i][j] = row.get(j);
+        }
+
+        return array;
+    }
+
     private InputUtils() {}
 }
