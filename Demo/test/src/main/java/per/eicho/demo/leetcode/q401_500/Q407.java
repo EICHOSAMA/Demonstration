@@ -28,22 +28,26 @@ public final class Q407 {
         // 4. 0 <= heightMap[i][j] <= 2 * 10^4
         final int m = heightMap.length;
         final int n = heightMap[0].length;
+        final int total = m * n;
         final PriorityQueue<int[]> minHeap = 
             new PriorityQueue<>((i1, i2) -> i1[H] - i2[H]);
         final boolean[][] marks = new boolean[m][n];
 
+        int count = 0;
         for (int i = 0, bot = m - 1; i < n; i++) {
             add(heightMap, minHeap, marks, 0, i);
             add(heightMap, minHeap, marks, bot, i);
+            count += 2;
         }
 
         for (int i = 1, r = n - 1, bound = m - 2; i <= bound; i++) {
             add(heightMap, minHeap, marks, i, 0);
             add(heightMap, minHeap, marks, i, r);
+            count += 2;
         }
 
         int result = 0;
-        while (!minHeap.isEmpty()) {
+        while (count < total) {
             final int[] info = minHeap.poll();
 
             for (int[] direction : directions) {
@@ -59,6 +63,7 @@ public final class Q407 {
                 }
                 
                 add(heightMap, minHeap, marks, nx, ny);
+                count++;
             }
         }
 
