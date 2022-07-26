@@ -11,6 +11,7 @@ public final class Q236 {
 
     TreeNode p;
     TreeNode q;
+    TreeNode result;
 
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         // 1. The number of nodes in the tree is in the range [2, 105].
@@ -21,33 +22,27 @@ public final class Q236 {
 
         this.p = p;
         this.q = q;
-
-        return postOrderTraversal(root, new int[]{0b00});
+        postOrderTraversal(root);
+        return result;
     }
 
-    private TreeNode postOrderTraversal(TreeNode node, int[] mark) {
-        if (node == null) return null;
-        final int originalStatus = mark[0];
+    private int postOrderTraversal(TreeNode node) {
+        if (node == null) return 0b00;
 
-        
-        TreeNode left = postOrderTraversal(node.left, mark);
-        int searchLeft = mark[0];
-        if (left != null) return left;
+        int left = postOrderTraversal(node.left);
+        if (left == 0b11) return 0b11;
 
-        mark[0] = originalStatus;
-        TreeNode right = postOrderTraversal(node.right, mark);
-        int searchRight = mark[0];
-        if (right != null) return right;
+        int right = postOrderTraversal(node.right);
+        if (right == 0b11) return 0b11;
 
-        mark[0] = originalStatus | searchLeft | searchRight;
-
+        int status = left | right;
         if (node.val == q.val) {
-            mark[0] |= 0b10;
+            status |= 0b10;
         } else if (node.val == p.val) {
-            mark[0] |= 0b01;
+            status |= 0b01;
         }
 
-        if (mark[0] == 0b11) return node;
-        return null;
+        if (status == 0b11) result = node;
+        return status;
     }
 }
