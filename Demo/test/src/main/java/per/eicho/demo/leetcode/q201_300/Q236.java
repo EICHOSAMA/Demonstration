@@ -1,8 +1,5 @@
 package per.eicho.demo.leetcode.q201_300;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import per.eicho.demo.leetcode.datastructure.TreeNode;
 
 /**
@@ -25,25 +22,32 @@ public final class Q236 {
         this.p = p;
         this.q = q;
 
-        return postOrderTraversal(root, new HashSet<>());
+        return postOrderTraversal(root, new int[]{0b00});
     }
 
-    private TreeNode postOrderTraversal(TreeNode node, Set<TreeNode> set) {
+    private TreeNode postOrderTraversal(TreeNode node, int[] mark) {
         if (node == null) return null;
+        final int originalStatus = mark[0];
 
-        Set<TreeNode> setL = new HashSet<>();
-        TreeNode left = postOrderTraversal(node.left, setL);
+        
+        TreeNode left = postOrderTraversal(node.left, mark);
+        int searchLeft = mark[0];
         if (left != null) return left;
 
-        Set<TreeNode> setR = new HashSet<>();
-        TreeNode right = postOrderTraversal(node.right, setR);
+        mark[0] = originalStatus;
+        TreeNode right = postOrderTraversal(node.right, mark);
+        int searchRight = mark[0];
         if (right != null) return right;
 
-        set.addAll(setL);
-        set.addAll(setR);
-        set.add(node);
+        mark[0] = originalStatus | searchLeft | searchRight;
 
-        if (set.contains(p) && set.contains(q)) return node;
+        if (node.val == q.val) {
+            mark[0] |= 0b10;
+        } else if (node.val == p.val) {
+            mark[0] |= 0b01;
+        }
+
+        if (mark[0] == 0b11) return node;
         return null;
     }
 }
