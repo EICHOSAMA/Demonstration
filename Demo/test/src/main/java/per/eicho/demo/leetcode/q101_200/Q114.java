@@ -9,27 +9,27 @@ import per.eicho.demo.leetcode.datastructure.TreeNode;
  */
 public final class Q114 {
     public void flatten(TreeNode root) {
-        flatTreeAndReturnLastNode(root);
-    }
+        // 1. The number of nodes in the tree is in the range [0, 2000].
+        // 2. -100 <= Node.val <= 100
+        TreeNode cursor = root;
+        while (cursor != null) {
+            if (cursor.left != null) {
+                TreeNode rmn = cursor.left; // rmn: right most node.
 
-    private TreeNode flatTreeAndReturnLastNode(TreeNode root) {
-        if (root == null) return null;
-        if (root.left == null && root.right == null) return root;
-
-        final TreeNode leftLast = flatTreeAndReturnLastNode(root.left);
-        final TreeNode rightLast = flatTreeAndReturnLastNode(root.right);
-
-        final TreeNode left = root.left;
-        final TreeNode right = root.right;
-        
-        if (left != null) {
-            root.right = left;
-            leftLast.right = right;
-            root.left = null;
-        } else {
-            root.right = right;
+                while (rmn.right != null && rmn.right != cursor) rmn = rmn.right;
+                
+                if (rmn.right == null) {
+                    rmn.right = cursor;
+                    cursor = cursor.left;
+                } else {
+                    rmn.right = cursor.right;
+                    cursor.right = cursor.left;
+                    cursor.left = null;
+                    cursor = rmn.right;
+                }
+            } else {
+                cursor = cursor.right;
+            }
         }
-
-        return rightLast != null ? rightLast : leftLast;
     }
 }
