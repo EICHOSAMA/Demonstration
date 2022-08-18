@@ -21,7 +21,7 @@ public class BubbleAscendingSortTest {
 	public void testDoSort() {
 		Random random = new Random(); 
 		for (int i = 0; i < 10; i++) { // 10回
-			final int randomLength = random.nextInt(100000) + 1;
+			final int randomLength = random.nextInt(10000) + 1;
 			final int[] input = new int[randomLength];
 			
 			for (int j = 0; j < randomLength; j++) {
