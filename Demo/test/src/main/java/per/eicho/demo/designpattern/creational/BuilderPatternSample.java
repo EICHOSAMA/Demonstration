@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+import per.eicho.demo.designpattern.annotation.GoFDesignPattern;
+
 /**
  * <p>创建型模式 - 生成器</p>
  * <pre>
@@ -19,6 +21,7 @@ import java.util.Objects;
  *   - Lombok里的@Builder（注：Lombok不推荐生产环境使用，仅限个人玩玩）
  * </pre>
  */
+@GoFDesignPattern
 final class BuilderPatternSample {
 
     /** 串行任务 */

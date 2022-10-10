@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import per.eicho.demo.designpattern.annotation.GoFDesignPattern;
 import per.eicho.demo.designpattern.structural.FlyweightSample.RGBColor.PredefinedColor;
 
 /**
@@ -20,6 +21,7 @@ import per.eicho.demo.designpattern.structural.FlyweightSample.RGBColor.Predefin
  *   - 如上述之外其他6种原生类型的装箱类等等
  * </pre>
  */
+@GoFDesignPattern
 final class FlyweightSample {
 
     /** 存储RGB颜色信息的类 */

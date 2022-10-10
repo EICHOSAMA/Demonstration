@@ -1,5 +1,7 @@
 package per.eicho.demo.designpattern.structural;
 
+import per.eicho.demo.designpattern.annotation.GoFDesignPattern;
+
 /**
  * <p>结构型模式 - 适配器模式</p>
  * <pre>
@@ -26,6 +28,7 @@ package per.eicho.demo.designpattern.structural;
  *  使用的接口就可以使本不能兼容的两个类协同工作且不用新增重复的代码。
  * </pre>
  */
+@GoFDesignPattern
 final class AdapterPatternSample {
     
     /** 
