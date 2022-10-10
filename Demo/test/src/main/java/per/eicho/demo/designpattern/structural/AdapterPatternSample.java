@@ -14,15 +14,70 @@ package per.eicho.demo.designpattern.structural;
  * </pre>
  * 
  * <pre>
- *  JDK的io包里就有典型的适配器模式的实际应用：
+ *  JDK就有适配器模式的实际应用：
  *   - java.io.InputStreamReader(InputStream)
  *   - java.io.OutputStreamWriter(OutputStream)
+ *   - java.util.Arrays#asList()
+ * </pre>
+ * 
+ * <pre>
+ *  总结就是对于现有的类，当其不满足客户类的接口需求但其又能满足客户类的实际计算需求时
+ *  可以使用适配器模式对现有类进行一次包装，对客户隐藏低层具体实现类且包装成客户类希望
+ *  使用的接口就可以使本不能兼容的两个类协同工作且不用新增重复的代码。
  * </pre>
  */
 final class AdapterPatternSample {
     
-    
+    /** 
+     * 难以修改或者控制权不在自己手里的类
+     */
+    final static class ThirdPartyUtils {
 
+        /**
+         * <p>日语（加算・カサン・kasan）方法</p>
+         * <pre>
+         *  对给定的值a, b，返回其和
+         * </pre>
+         */
+        public static int kasan(int a, int b) {
+            return a + b;
+        }
+    }
+
+    /** 
+     * 客户类，
+     * 客户类希望它能使用实现了AddOperation接口的组件来帮助其完成加法运算 
+     */
+    final static class Client {
+        final AddOperation component;
+
+        Client(AddOperation component) {
+            this.component = component;
+        }
+
+        void doSomething() {
+            System.out.println("计算结果:" + component.add(2, 5));
+        }
+    }
+
+    final static class ThirdPartyUtilsWrapper implements AddOperation {
+
+        @Override
+        public int add(int a, int b) {
+            return ThirdPartyUtils.kasan(a, b);
+        }
+        
+    }    
+
+    static interface AddOperation {
+        /** 对给定的两个数返回其和 */
+        public int add(int a, int b);
+    }
+
+    public static void main(String[] args) {
+        final Client client = new Client(new ThirdPartyUtilsWrapper());
+        client.doSomething();
+    }
 
     private AdapterPatternSample() {}
 }
