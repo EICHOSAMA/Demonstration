@@ -29,7 +29,7 @@ import per.eicho.demo.designpattern.annotation.GoFDesignPattern;
  * </pre>
  */
 @GoFDesignPattern
-final class TemplateMethodSample {
+final class TemplateMethodPatternSample {
 
     static interface MailAddressLoadService {
         public List<String> loadDirectorMailAddressesByName(String service);
@@ -100,5 +100,5 @@ final class TemplateMethodSample {
         }
     }
 
-    private TemplateMethodSample() {}
+    private TemplateMethodPatternSample() {}
 }
