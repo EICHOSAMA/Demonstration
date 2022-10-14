@@ -3,7 +3,7 @@ package per.eicho.demo.designpattern.creational;
 import per.eicho.demo.designpattern.annotation.GoFDesignPattern;
 
 /**
- * <p>创建型模式 - 单例</p>
+ * <p>创建型模式 - 单例模式</p>
  * <pre>
  *  单例模式主要意图是保证一个类仅有一个实例，并对外提供一个访问这个仅有实例的方法。
  * </pre>

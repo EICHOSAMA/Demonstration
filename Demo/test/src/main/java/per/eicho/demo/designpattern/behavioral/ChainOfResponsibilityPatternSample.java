@@ -3,7 +3,7 @@ package per.eicho.demo.designpattern.behavioral;
 import per.eicho.demo.designpattern.annotation.GoFDesignPattern;
 
 /**
- * <p>行为模式 - 责任链</p>
+ * <p>行为模式 - 责任链模式</p>
  * <pre>
  *  责任链，Chain Of Responsibility，CoR是非常重要的一种设计模式。
  *  无论前后端都非常常见。后端的请求Filter、异常处理、前端的GUI事件响应链等等...

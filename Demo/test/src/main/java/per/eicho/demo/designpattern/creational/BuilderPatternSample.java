@@ -8,7 +8,7 @@ import java.util.Objects;
 import per.eicho.demo.designpattern.annotation.GoFDesignPattern;
 
 /**
- * <p>创建型模式 - 生成器</p>
+ * <p>创建型模式 - 生成器模式</p>
  * <pre>
  *  生成器（builder）是非常经典的创建复杂对象的一种设计模式。
  *  配合函数式编程会使得你创建复杂对象的代码变得极其丝滑。

@@ -6,7 +6,7 @@ import java.util.List;
 import per.eicho.demo.designpattern.annotation.GoFDesignPattern;
 
 /**
- * <p>创建型模式 - 原型</p>
+ * <p>创建型模式 - 原型模式</p>
  * <pre>
  *  原型，Prototype模式，意图是通过克隆（Clone）的方式来极大地简化复杂对象的创建过程。
  *  原型涉及到克隆绕不开的就是<b>浅拷贝</b>和<b>深拷贝</b>以及 {@link Cloneable}接口了。

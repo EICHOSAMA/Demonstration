@@ -3,7 +3,7 @@ package per.eicho.demo.designpattern.behavioral;
 import per.eicho.demo.designpattern.annotation.GoFDesignPattern;
 
 /**
- * <p>行为模式 - 中介者/p>
+ * <p>行为模式 - 中介者模式</p>
  * <pre>
  *  中介者，Mediator。中介日常生活中基本就是多方人或势力中起协调作用的。
  *  

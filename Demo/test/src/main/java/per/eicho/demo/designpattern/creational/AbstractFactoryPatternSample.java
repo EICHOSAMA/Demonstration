@@ -3,7 +3,7 @@ package per.eicho.demo.designpattern.creational;
 import per.eicho.demo.designpattern.annotation.GoFDesignPattern;
 
 /**
- * <p>创建型模式 - 抽象工厂</p>
+ * <p>创建型模式 - 抽象工厂模式</p>
  * <pre>
  *  抽象工厂，Abstract Factory。工厂模式是把组装复杂对象的逻辑给隐藏到工厂内部。
  *  抽象工厂模式呢则是当你需要使用<b>多组协同使用的产品系列中的一组</b>时使用到的设计模式。

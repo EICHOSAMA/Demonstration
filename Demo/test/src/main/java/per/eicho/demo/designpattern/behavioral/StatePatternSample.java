@@ -5,7 +5,7 @@ import java.util.Objects;
 import per.eicho.demo.designpattern.annotation.GoFDesignPattern;
 
 /**
- * <p>行为模式 - 状态/p>
+ * <p>行为模式 - 状态模式</p>
  * <pre>
  *  State，状态。允许对象拥有不同的状态，在不同状态下其会表现出不同的特性。
  *   

@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Objects;
 
 import per.eicho.demo.designpattern.annotation.GoFDesignPattern;
+
 /**
- * <p>行为模式 - 模板方法</p>
+ * <p>行为模式 - 模板方法模式</p>
  * <pre>
  *  Template method，译做模板方法。模板方法可以说是和抽象类是高度绑定的。
  *  通过在抽象类里指定程序骨架（主控制流），通过设计一些节点（模板方法），

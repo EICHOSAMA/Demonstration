@@ -3,7 +3,7 @@ package per.eicho.demo.designpattern.structural;
 import per.eicho.demo.designpattern.annotation.GoFDesignPattern;
 
 /**
- * <p>行为模式 - 装饰</p>
+ * <p>结构型模式 - 装饰模式</p>
  * <pre>
  *  装饰，Decorator。装饰意味着在某样东西原有的基础上再额外点缀点其他的。
  *  同样的，装饰模式也是在某类原有的基础上<b>给这个类额外增加一些特性</b>的一种设计模式。

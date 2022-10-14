@@ -6,7 +6,7 @@ import java.util.List;
 import per.eicho.demo.designpattern.annotation.GoFDesignPattern;
 
 /**
- * <p>行为模式 - 策略/p>
+ * <p>行为模式 - 策略模式</p>
  * <pre>
  *  策略，Strategy。策略的含义是“为达成目标需要做的事"，
  *  
