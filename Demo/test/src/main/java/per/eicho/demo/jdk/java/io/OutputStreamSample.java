@@ -15,9 +15,9 @@ package per.eicho.demo.jdk.java.io;
  * <pre>
  *  因为其过于和InputStream类似就不多赘述了，仅讲其相比InputStream多实现的一个接口{@link java.io.Flushable}
  *  
- *  Flushable接口仅包含一个方法flush()啊，flush啊就是冲马桶那个冲。意味着如果输出流缓存（或积攒）了一些
- *  数据准备留着一起发送给下游目标资源时，输出流的客户（咱们调用方）可以调用flush方法使其把积攒的
- *  数据丢给下游。
+ *  Flushable接口仅包含一个方法flush()啊，flush啊就是冲马桶那个冲。
+ *  意味着如果输出流积攒（缓冲）了一些数据准备留着一起发送给下游目标资源时，
+ *  输出流的客户（咱们调用方）可以调用flush方法使其把积攒（缓冲）的数据“冲”给下游。
  * </pre>
  * 
  * @see {@link InputStreamSample}
