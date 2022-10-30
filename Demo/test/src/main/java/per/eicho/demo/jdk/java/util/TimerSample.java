@@ -24,7 +24,7 @@ import java.util.TimerTask;
  *    repeatedly executing tasks at a given rate or delay. 
  *    It is effectively a more versatile replacement for the Timer/TimerTask combination,
  *  
- *  所以在Timer文档中也说明了JUC包下的{@link java.util.concurrent.ScheduledExecutorService}接口是
+ *  所以在Timer文档中也说明了JUC包下的{@link java.util.concurrent.ScheduledThreadPoolExecutor}类是
  *  Timer/TimerTask组合的替代。
  * </pre>
  */
