@@ -24,7 +24,6 @@ package per.eicho.demo.algorithm.string.palindromic.manacher;
  *    who described a solution based on suffix trees. Efficient parallel algorithms are also known for the problem.
  *  
  * </pre>
- * 
  */
 public final class ManacherSample {
 
@@ -44,7 +43,7 @@ public final class ManacherSample {
         final int[] f = new int[n]; // 存储半径信息
 
         int c = -1; // 中心点
-        int r = -1; // 右边界
+        int rBound = -1; // 右边界
 
         int maxLen = 1;
 
@@ -52,9 +51,15 @@ public final class ManacherSample {
         for (int i = 0; i < n; i++) {
             // 1. 跳过重复计算
             //   核心点，跳过不必要的中心外扩的关键。可以直接根据已有信息算出初始半径。
-            //   对于大的回文[c - f[c], c + f[c]]一定有一个i的想对c的对称点(2*c - i)已经被计算过了。
+            //   对于大的回文[c - f[c], c + f[c]]一定有一个i的相对c的对称点(2*c - i)已经被计算过了。
+            //                sp   ↓中心点
+            //                ↓    ↓    ↓目前位置
+            //  |---------l---s----c----i---r-------------|
+            //            ↑左边界未记录     ↑右边界
+            //                ↑sp点的最大半径一定被计算过（计算顺序为 s-->c-->i (当前正在计算的位置)）
+            //                ↑这个信息的利用是跳过不必要中心外扩的核心。
             //   那么利用这个已经计算过的f[getSymmetryPointIndex(c, i)]信息则可以跳过很大一部分重复计算过程。
-            int radius = r > i ? Math.min(f[getSymmetryPointIndex(c, i)], r - i) : 1;
+            int radius = rBound > i ? Math.min(f[getSymmetryPointIndex(c, i)], rBound - i) : 1;
 
             // 2. 中心外扩
             //   接上跳过的部分完成未完成的中心外扩处理。
@@ -64,8 +69,8 @@ public final class ManacherSample {
             }
 
             // 3. 维护当前边界最右回文子串信息。
-            if (i + radius > r) {
-                r = i + radius;
+            if (i + radius > rBound) {
+                rBound = i + radius;
                 c = i;
             }
 
