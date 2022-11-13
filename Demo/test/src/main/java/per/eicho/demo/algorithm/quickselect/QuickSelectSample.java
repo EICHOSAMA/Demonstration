@@ -25,7 +25,7 @@ public final class QuickSelectSample {
         final int pivotIndex = r;
         final int pivot = nums[l];
 
-        swap(nums, l , r--);
+        swap(nums, l , r--); // [l, r] --> [l, r - 1][r th Element is pivot]
         while (l <= r) {
             if (nums[l] < pivot) {
                 l++;
