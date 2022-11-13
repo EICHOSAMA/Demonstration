@@ -1,4 +1,4 @@
-package per.eicho.demo.nowcoder;
+package per.eicho.demo.nowcoder.huawei;
 
 import java.util.Scanner;
 
