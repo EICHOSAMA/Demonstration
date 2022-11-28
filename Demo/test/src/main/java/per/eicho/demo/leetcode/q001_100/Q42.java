@@ -28,7 +28,6 @@ public final class Q42 {
         while (!heap.isEmpty()) {
             final int idx = heap.poll();
             final int h = height[idx];
-            System.out.println(idx);
 
             if (l < idx && idx < r) continue;
             if (idx < l) {
