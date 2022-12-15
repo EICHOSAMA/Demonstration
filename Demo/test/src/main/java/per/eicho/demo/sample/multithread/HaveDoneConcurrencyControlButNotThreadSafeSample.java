@@ -20,10 +20,10 @@ public final class HaveDoneConcurrencyControlButNotThreadSafeSample {
         final MutiThreadCounter counter1 = new MutiThreadCounter();
         final MutiThreadCounter counter2 = new MutiThreadCounter();
 
-        final Thread thread1 = genWorkerThread(counter1, false);
-        final Thread thread2 = genWorkerThread(counter1, false);
-        final Thread thread3 = genWorkerThread(counter2, true);
-        final Thread thread4 = genWorkerThread(counter2, true);
+        final Thread thread1 = genWorkerThread(counter1, false); // 使用add方法
+        final Thread thread2 = genWorkerThread(counter1, true); // 使用syncAdd方法
+        final Thread thread3 = genWorkerThread(counter2, true); // 使用syncAdd方法
+        final Thread thread4 = genWorkerThread(counter2, true); // 使用syncAdd方法
         final Thread[] threads = new Thread[]{thread1, thread2, thread3, thread4};
 
         for (Thread thread : threads) thread.start();
