@@ -1,6 +1,7 @@
 package per.eicho.utils;
 
 import java.util.Random;
+import java.util.UUID;
 
 public final class StringUtils {
 
@@ -58,9 +59,30 @@ public final class StringUtils {
         return result;
     }
 
-    // public static void main(String[] args) {
-    //     System.out.println("(" + StringUtils.generateCJKStringRandomly(11) + ")");
-    // }
+    /**
+     * <p>生成UUID字符串</p>
+     * <pre>
+     *  利用{@link UUID#randomUUID()}随机生成一个UUID并根据参数转换其至对应格式的UUID字符串。
+     *  
+     *  UUID: "e00e08c8-de2f-4cf9-ac07-ad98ae0fab83"，可根据参数生成四种结果。
+     *    1. "e00e08c8de2f4cf9ac07ad98ae0fab83"
+     *    2. "e00e08c8-de2f-4cf9-ac07-ad98ae0fab83"
+     *    3. "E00E08C8DE2F4CF9AC07AD98AE0FAB83"
+     *    4. "E00E08C8-DE2F-4CF9-AC07-AD98AE0FAB83"
+     * </pre>
+     * 
+     * @param shouldUseLowerCase 是否使用小写
+     * @param shouldRemoveDash 是否去掉连接符 '-'
+     * @return 生成后的UUID字符串（根据是否去掉连接符长度分别为32和36）
+     */
+    public static String genUUIDStr(boolean shouldUseLowerCase, boolean shouldRemoveDash) {
+        final UUID uuid = UUID.randomUUID();
+        String uuidStr = uuid.toString();
+        if (shouldRemoveDash) {
+            uuidStr = uuidStr.replaceAll("-", "");
+        }
+        return shouldUseLowerCase ? uuidStr.toLowerCase() : uuidStr.toUpperCase();
+    }
     
     /** 工具类, 隐藏构造方法 */
     private StringUtils() {}
