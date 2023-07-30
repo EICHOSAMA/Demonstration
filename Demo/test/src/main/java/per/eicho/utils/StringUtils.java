@@ -4,7 +4,6 @@ import java.util.Random;
 import java.util.UUID;
 
 public final class StringUtils {
-
     private static final int[] CJK_CHARACTER_RANGE = new int[]{0x4E00, 0x9FFF};
     
     /**
